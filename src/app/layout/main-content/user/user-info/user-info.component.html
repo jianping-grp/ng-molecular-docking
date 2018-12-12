@@ -1,0 +1,12 @@
+<nz-card class="" nzTitle="用户个人信息中心">
+  <ul>
+    <ul class="list-unstyled row">
+      <li><span>用户名：</span> <span>{{userInfo?.username}}</span></li><br>
+      <li><span>姓名：</span> <span >{{userInfo?.name}}</span></li><br>
+      <li><span>密码：</span> <span>****** <a [routerLink]="['../change-password']">修改密码？</a></span></li><br>
+      <li><span>注册时间：</span> <span >{{userInfo?.date_joined | date: 'short'}}</span></li><br>
+      <li><span>最后登录时间：</span> <span>{{userInfo?.last_login | date: 'short'}}</span></li><br>
+      <li><span>电话号码：</span> <span >{{userInfo?.mobile}}</span></li><br>
+    </ul>
+  </ul>
+</nz-card>

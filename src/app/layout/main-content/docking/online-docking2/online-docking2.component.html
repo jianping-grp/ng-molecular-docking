@@ -1,0 +1,69 @@
+<form nz-form class="form" [formGroup]="dockingForm2" (submit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>任务名称</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <input nz-input formControlName="work_name" placeholder="请输入任务名称">
+      <nz-form-explain *ngIf="dockingForm2.get('work_name').dirty && dockingForm2.get('work_name').errors || dockingForm2.get('work_name').pending">
+        请输入任务名称！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>任务描述</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <textarea nz-input  formControlName="work_decs"></textarea>
+      <nz-form-explain *ngIf="dockingForm2.get('work_decs').dirty&&dockingForm2.get('work_decs').hasError('required')">
+        请输入任务的描述！
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <!--<nz-form-item>-->
+    <!--<nz-form-label [nzSpan]="8" nzRequired>分子库</nz-form-label>-->
+    <!--<nz-form-control [nzSpan]="7">-->
+      <!--<nz-select formControlName="mol_db">-->
+        <!--<nz-option nzLabel="zinc" nzValue=1></nz-option>-->
+        <!--<nz-option nzLabel="chembl" nzValue=2></nz-option>-->
+        <!--<nz-option nzLabel="wi" nzValue=3></nz-option>-->
+      <!--</nz-select>-->
+      <!--<nz-form-explain></nz-form-explain>-->
+    <!--</nz-form-control>-->
+  <!--</nz-form-item>-->
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>蛋白质文件</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <input type="file"
+             accept=".pdb"
+             (change)="targetFileChange($event)"
+      >
+      <!--<nz-form-explain *ngIf="dockingForm.get('pdbFile').dirty && dockingForm.get('pdbFile').hasError('required')">-->
+      <!--请上传蛋白质文件！-->
+      <!--</nz-form-explain>-->
+      <span>&nbsp;请上传pdb格式的文件！</span>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>活性位点氨基酸</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <input type="file"
+             accept=".pdf"
+             (change)="ligandFileChange($event)"
+      >
+      <span>&nbsp;请上传pdb格式的文件！</span>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>配体文件</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <input type="file"
+             accept=".mol2"
+             (change)="mol2FileChange($event)"
+      >
+      <span>&nbsp;请上传mol2格式的文件！</span>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="7" [nzOffset]="8">
+      <button nz-button [nzType]="'primary'">提交任务</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

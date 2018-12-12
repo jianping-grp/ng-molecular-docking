@@ -1,0 +1,11 @@
+.li-style {
+  text-align: center;
+  font-size: 16px;
+}
+
+.menu-title {
+  background-color: #d3d3d3;
+  margin: 0 0;
+  /*text-align: center;*/
+  height: 43px;
+}
