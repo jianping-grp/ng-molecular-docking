@@ -1,286 +1,79 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
-    <div class="mdl-layout__header-row portfolio-logo-row">
-      <span class="mdl-layout__title">
-                    <div class="portfolio-logo"></div>
-                    <span class="mdl-layout__title">Simple portfolio website</span>
-                </span>
-    </div>
-    <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
-      <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-        <!--<a mat-button>服务与支持</a>-->
-        <!--<a mat-button>服务与支持</a>-->
-        <!--<a mat-button>服务与支持</a>-->
-        <a mat-button class="mdl-navigation__link" [matMenuTriggerFor]="animals">Animal index</a>
-
-        <mat-menu xPosition="after" yPosition="above" #animals="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
-          <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
-        </mat-menu>
-
-        <mat-menu #vertebrates="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
-          <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
-          <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
-          <button mat-menu-item>Birds</button>
-          <button mat-menu-item>Mammals</button>
-        </mat-menu>
-
-        <mat-menu #invertebrates="matMenu">
-          <button mat-menu-item>Insects</button>
-          <button mat-menu-item>Molluscs</button>
-          <button mat-menu-item>Crustaceans</button>
-          <button mat-menu-item>Corals</button>
-          <button mat-menu-item>Arachnids</button>
-          <button mat-menu-item>Velvet worms</button>
-          <button mat-menu-item>Horseshoe crabs</button>
-        </mat-menu>
-
-        <mat-menu #fish="matMenu">
-          <button mat-menu-item>Baikal oilfish</button>
-          <button mat-menu-item>Bala shark</button>
-          <button mat-menu-item>Ballan wrasse</button>
-          <button mat-menu-item>Bamboo shark</button>
-          <button mat-menu-item>Banded killifish</button>
-        </mat-menu>
-
-        <mat-menu #amphibians="matMenu">
-          <button mat-menu-item>Sonoran desert toad</button>
-          <button mat-menu-item>Western toad</button>
-          <button mat-menu-item>Arroyo toad</button>
-          <button mat-menu-item>Yosemite toad</button>
-        </mat-menu>
-
-        <mat-menu #reptiles="matMenu">
-          <button mat-menu-item>Banded Day Gecko</button>
-          <button mat-menu-item>Banded Gila Monster</button>
-          <button mat-menu-item>Black Tree Monitor</button>
-          <button mat-menu-item>Blue Spiny Lizard</button>
-          <button mat-menu-item disabled>Velociraptor</button>
-        </mat-menu>
-        <a class="mdl-navigation__link is-active" mat-button href="index.html">Portfolio</a>
-        <a class="mdl-navigation__link" mat-button href="blog.html">Blog</a>
-        <a class="mdl-navigation__link" mat-button href="about.html">About</a>
-        <a class="mdl-navigation__link" mat-button href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-  <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-    <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
-      <!--<a class="mdl-navigation__link is-active"  mat-button href="index.html">Portfolio</a>-->
-      <!--<a class="mdl-navigation__link"  mat-button href="blog.html">Blog</a>-->
-      <!--<a class="mdl-navigation__link"  mat-button href="about.html">About</a>-->
-      <!--<a class="mdl-navigation__link"  mat-button href="contact.html">Contact</a>-->
-      <a mat-button>服务与支持</a>
-      <a mat-button>服务与支持</a>
-      <a mat-button>服务与支持</a>
-      <button mat-button [matMenuTriggerFor]="animals">Animal index</button>
-
-      <mat-menu #animals="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
-        <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
-      </mat-menu>
-
-      <mat-menu #vertebrates="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
-        <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
-        <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
-        <button mat-menu-item>Birds</button>
-        <button mat-menu-item>Mammals</button>
-      </mat-menu>
-
-      <mat-menu #invertebrates="matMenu">
-        <button mat-menu-item>Insects</button>
-        <button mat-menu-item>Molluscs</button>
-        <button mat-menu-item>Crustaceans</button>
-        <button mat-menu-item>Corals</button>
-        <button mat-menu-item>Arachnids</button>
-        <button mat-menu-item>Velvet worms</button>
-        <button mat-menu-item>Horseshoe crabs</button>
-      </mat-menu>
-
-      <mat-menu #fish="matMenu">
-        <button mat-menu-item>Baikal oilfish</button>
-        <button mat-menu-item>Bala shark</button>
-        <button mat-menu-item>Ballan wrasse</button>
-        <button mat-menu-item>Bamboo shark</button>
-        <button mat-menu-item>Banded killifish</button>
-      </mat-menu>
-
-      <mat-menu #amphibians="matMenu">
-        <button mat-menu-item>Sonoran desert toad</button>
-        <button mat-menu-item>Western toad</button>
-        <button mat-menu-item>Arroyo toad</button>
-        <button mat-menu-item>Yosemite toad</button>
-      </mat-menu>
-
-      <mat-menu #reptiles="matMenu">
-        <button mat-menu-item>Banded Day Gecko</button>
-        <button mat-menu-item>Banded Gila Monster</button>
-        <button mat-menu-item>Black Tree Monitor</button>
-        <button mat-menu-item>Blue Spiny Lizard</button>
-        <button mat-menu-item disabled>Velociraptor</button>
-      </mat-menu>
-    </nav>
-  </div>
-  <main class="mdl-layout__content">
-    <div class="mdl-grid portfolio-max-width">
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work01.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Blog template</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work07.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Sunt nulla</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work02.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Android.com website</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work03.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Dashboard template</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work04.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Text-heavy website</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work08.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Ex officia laborum</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work05.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Stand-alone article</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work06.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">MDL website</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-      <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
-        <div class="mdl-card__media">
-          <img class="article-image" src=" images/example-work09.jpg" border="0" alt="">
-        </div>
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Consequat ut quis</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          Enim labore aliqua consequat ut quis ad occaecat aliquip incididunt. Sunt nulla eu enim irure enim nostrud
-          aliqua consectetur ad consectetur sunt ullamco officia. Ex officia laborum et consequat duis.
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent"
-             href="portfolio-example01.html">Read more</a>
-        </div>
-      </div>
-    </div>
-    <footer class="mdl-mini-footer">
-      <div class="mdl-mini-footer__left-section">
-        <div class="mdl-logo">Simple portfolio website</div>
-      </div>
-      <div class="mdl-mini-footer__right-section">
-        <ul class="mdl-mini-footer__link-list">
-          <li><a href="#">Help</a></li>
-          <li><a href="#">Privacy & Terms</a></li>
-        </ul>
-      </div>
-    </footer>
-  </main>
-</div>
-
+<mat-toolbar color="accent">
+  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  <span>
+    <h3>计算筛选信息平台</h3>
+  </span>&nbsp;&nbsp;
+  <button mat-button routerLink="home">首页</button>
+  <button mat-button [matMenuTriggerFor]="online">在线产品</button>
+    <mat-menu #online="matMenu">
+      <button mat-menu-item routerLink="docking/docking-home">分子对接</button>
+      <button mat-menu-item routerLink="screening/screening-home">虚拟筛选</button>
+    </mat-menu>
+  <button mat-button>服务与解决方案</button>
+  <button mat-button>关于我们</button>
+  <span class="toolbar-span"></span>
+  <app-user></app-user>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<!--<nz-layout class="layout">-->
+  <!--<nz-header>-->
+    <!--&lt;!&ndash;<div class="logo"></div>&ndash;&gt;-->
+    <!--<ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">-->
+      <!--<li nz-menu-item>首页</li>-->
+      <!--<li nz-submenu>-->
+        <!--<span title>在线产品</span>-->
+        <!--<ul>-->
+          <!--<li nz-menu-item routerLink="/docking/online-docking">-->
+            <!--&lt;!&ndash;<a routerLink="/docking/online-docking">分子对接</a>&ndash;&gt;-->
+            <!--分子对接-->
+          <!--</li>-->
+          <!--<li nz-menu-item>虚拟筛选</li>-->
+        <!--</ul>-->
+      <!--</li>-->
+      <!--<li nz-menu-item>服务与解决方案</li>-->
+      <!--<li nz-menu-item>技术支持</li>-->
+      <!--<li nz-menu-item>关于我们</li>-->
+    <!--</ul>-->
+  <!--</nz-header>-->
+    <!--<nz-layout style="padding:24px 0; background: #fff">-->
+      <!--<nz-sider [nzWidth]="200" style="background:#fff">-->
+        <!--<ul nz-menu [nzMode]="'inline'" style="height:100%">-->
+          <!--<li nz-submenu>-->
+            <!--<span title><i nz-icon type="user"></i>subnav 1</span>-->
+            <!--<ul>-->
+              <!--<li nz-menu-item>option1</li>-->
+              <!--<li nz-menu-item>option2</li>-->
+              <!--<li nz-menu-item>option3</li>-->
+              <!--<li nz-menu-item>option4</li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li nz-submenu>-->
+            <!--<span title><i nz-icon type="laptop"></i>subnav 2</span>-->
+            <!--<ul>-->
+              <!--<li nz-menu-item>option5</li>-->
+              <!--<li nz-menu-item>option6</li>-->
+              <!--<li nz-menu-item>option7</li>-->
+              <!--<li nz-menu-item>option8</li>-->
+            <!--</ul>-->
+          <!--</li>-->
+          <!--<li nz-submenu>-->
+            <!--<span title><i nz-icon type="notification"></i>subnav 3</span>-->
+            <!--<ul>-->
+              <!--<li nz-menu-item>option9</li>-->
+              <!--<li nz-menu-item>option10</li>-->
+              <!--<li nz-menu-item>option11</li>-->
+              <!--<li nz-menu-item>option12</li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</nz-sider>-->
+    <!--</nz-layout>-->
+    <!--<nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>-->
+  <!---->
+<!--</nz-layout>-->
+<app-litemol [targetId]="'protein'"
+             [elementId]="'enzyme'"
+             [url]="reNumProteinUrl"
+             [width]="'480px'"
+             [height]="'480px'"
+></app-litemol>

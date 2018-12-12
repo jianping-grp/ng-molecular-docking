@@ -2,3 +2,20 @@
   white-space: normal;
   /*max-width: 200px;*/
 }
+
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, .2);
+  margin: 0 28px;
+  float: left;
+
+}
+
+.toolbar-span {
+  flex: 1 1 auto;
+}
+
+.toolbar-right {
+  padding: 0 14px;
+}

@@ -1,0 +1,17 @@
+<nz-layout style="background: #fff">
+  <nz-sider [nzWidth]="240" style="background: #fff;border-bottom: 1px solid #e8e8e8">
+    <ul nz-menu>
+      <li nz-menu-item class="li-style" [routerLink]="['docking']">分子对接</li>
+      <li nz-menu-item class="li-style" [routerLink]="['docking-platform-introduction']">平台简介</li>
+      <li nz-menu-item class="li-style" [routerLink]="['docking-library-introduction']">对接库介绍</li>
+      <li nz-menu-item class="li-style" [routerLink]="['docking-document']">帮助文档</li>
+      <li nz-menu-item class="li-style">查看任务</li>
+      <li nz-menu-item class="li-style">查看订单</li>
+    </ul>
+  </nz-sider>
+  <nz-content>
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>
+
+

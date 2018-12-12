@@ -1,10 +1,34 @@
-import { NgModule } from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {GlobalService} from '../service/global/global.service';
+import {RestService} from '../service/rest/rest.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    RestService,
+    GlobalService
+  ],
+  exports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule
+  ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(
+    @Optional() @SkipSelf() parentModule: CoreModule
+  ) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded.');
+    }
+  }
+}

@@ -1,22 +1,35 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatMenuModule} from '@angular/material';
-
-
 import {AppComponent} from './app.component';
+import {CoreModule} from './core/core.module';
+import {SharedModule} from './shared/shared.module';
+import {AppRoutingModule} from './app-routing/app-routing.module';
+import {PageModule} from './layout/main-content/page/page.module';
+import {MAT_TOOLTIP_DEFAULT_OPTIONS} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {NgZorroAntdModule, NZ_I18N, NzMenuDirective, NzMenuModule, zh_CN} from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import {UserComponent} from './layout/main-content/user/user/user.component';
+
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatMenuModule
+    CoreModule,
+    SharedModule,
+    PageModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+     {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {}},
+     { provide: NZ_I18N, useValue: zh_CN }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
