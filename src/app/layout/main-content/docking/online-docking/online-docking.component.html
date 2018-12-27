@@ -1,6 +1,6 @@
 <nz-tabset>
   <nz-tab nzTitle="Docking1">
-    <form nz-form class="form" [formGroup]="dockingForm" (submit)="submitForm($event, dockingForm.value)">
+    <form nz-form class="form" (click)="openSnackBar()" [formGroup]="dockingForm" (submit)="submitForm($event, dockingForm.value)">
       <nz-form-item>
         <nz-form-label [nzSpan]="8" nzRequired>任务名称</nz-form-label>
         <nz-form-control [nzSpan]="7">

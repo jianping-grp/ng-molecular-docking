@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RestService} from '../../../../service/rest/rest.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-online-docking2',
@@ -12,9 +13,11 @@ export class OnlineDocking2Component implements OnInit {
   targetFile: File;
   ligandFile: File;
   mol2File: File;
+  currentUser: any;
   formData = new FormData();
   constructor(private rest: RestService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.dockingForm2 = this.fb.group({
@@ -22,6 +25,8 @@ export class OnlineDocking2Component implements OnInit {
       work_decs: ['', [Validators.required]],
       mol_db: ['', [Validators.required]],
     });
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = storedUser;
   }
 
   targetFileChange(event) {
@@ -101,5 +106,14 @@ export class OnlineDocking2Component implements OnInit {
         // todo add router
         }
       );
+  }
+
+  openSnackBar() {
+    if (this.currentUser) { return; }
+    this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
   }
 }

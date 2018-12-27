@@ -5,6 +5,7 @@ import {environment} from '../../../../../environments/environment';
 import {assertLessThan} from '@angular/core/src/render3/assert';
 import {RestService} from '../../../../service/rest/rest.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-online-docking',
@@ -17,6 +18,7 @@ export class OnlineDockingComponent implements OnInit {
   pdbTargetFile: File;
   mol2File: File;
   formData = new FormData();
+  currentUser: any;
   public uploader: FileUploader = new FileUploader({
     url: `${environment.REST_HOST}/autoducts/`, // todo modify
     method: 'POST',
@@ -25,7 +27,9 @@ export class OnlineDockingComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private rest: RestService,
-              private router: Router ) {
+              private router: Router,
+              public snackBar: MatSnackBar
+  ) {
 
   }
 
@@ -42,6 +46,8 @@ export class OnlineDockingComponent implements OnInit {
       center_z: ['', [Validators.required]],
       // pdbFile: ['', [Validators.required]]
     });
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = storedUser;
   }
 
   fileChange($event) {
@@ -107,7 +113,7 @@ export class OnlineDockingComponent implements OnInit {
 
   uploaderFile() {
     const form = this.dockingForm.value;
-    this.formData.append('job_name', form.work_name);
+    this.formData.append('work_name', form.work_name);
     this.formData.append('work_desc', form.work_decs);
     this.formData.append('size_x', form.size_x);
     this.formData.append('size_y', form.size_y);
@@ -115,8 +121,8 @@ export class OnlineDockingComponent implements OnInit {
     this.formData.append('center_x', form.center_x);
     this.formData.append('center_y', form.center_y);
     this.formData.append('center_z', form.center_z);
-    this.formData.append('pdb_file', form.pdbTargetFile);
-    this.formData.append('lig_file', form.mol2File); // todo mol2 file modify
+    this.formData.append('pdb_file', this.pdbTargetFile);
+    this.formData.append('lig_file', this.mol2File); // todo mol2 file modify
 
     this.rest.postData(`autoducts`, this.formData)
       .subscribe(data => {
@@ -130,13 +136,23 @@ export class OnlineDockingComponent implements OnInit {
         },
         () =>  {
         //  todo add router
+        //   this.dockingForm.reset();
         });
+  }
+
+  openSnackBar() {
+    if (this.currentUser) { return; }
+    this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
   }
 
   // uploaderFile() { // 文件上传到后台服务器
   //   this.uploader.setOptions({
   //     additionalParameter: this.dockingFormDatedockingF
-  //   });
+  //   });！
   //   console.log(this.uploader); // todo delete
   //   this.uploader.queue[0].onSuccess = function (response, status, headers) {
   //     console.log('status:', status);

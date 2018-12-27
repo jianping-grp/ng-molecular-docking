@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RestService} from '../../../../service/rest/rest.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-online-screening2',
@@ -12,9 +13,12 @@ export class OnlineScreening2Component implements OnInit {
   screeningForm2: FormGroup;
   targetFile: File;
   ligandFile: File;
+  currentUser: any;
+  userDbFile: File;
   formData = new FormData();
   constructor(private rest: RestService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.screeningForm2 = this.fb.group({
@@ -22,11 +26,21 @@ export class OnlineScreening2Component implements OnInit {
       work_decs: ['', [Validators.required]],
       mol_db: ['', [Validators.required]],
     });
+
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = storedUser;
   }
 
   targetFileChange(event) {
     this.targetFile = event.target.files[0];
     if (!this.isPdbFile(this.targetFile)) {
+      alert('请上传pdb格式的文件！');
+    }
+  }
+
+  userDbFileChange(event) {
+    this.userDbFile = event.target.files[0];
+    if (this.isPdbFile(this.userDbFile)) {
       alert('请上传pdb格式的文件！');
     }
   }
@@ -45,6 +59,13 @@ export class OnlineScreening2Component implements OnInit {
   }
 
   onSubmit() {
+    // 判断是否纯在文件以及文件的格式是否是pdb格式；
+    if (this.screeningForm2.value.mol_db === 'userDb') {
+      if (!this.userDbFile || !this.isPdbFile(this.userDbFile)) {
+        alert('请上传pdb格式的文件!');
+      }
+    }
+
     if (!this.targetFile || !this.ligandFile) {
       alert('请上传pdb格式的文件!');
     } else if (!this.isPdbFile(this.targetFile) || !this.isPdbFile(this.ligandFile)) {
@@ -64,12 +85,16 @@ export class OnlineScreening2Component implements OnInit {
 
   formSubmit() {
     const form = this.screeningForm2.value;
-    this.formData.append('work_name', form['work_name'].value);
-    this.formData.append('work_decs', form['work_decs'].value);
-    this.formData.append('mol_db', form['mol_db'].value);
+    if (form.mol_db === 'userDb') {
+      this.formData.append('user_db', this.userDbFile);
+    } else {
+      this.formData.append('mol_db', form.mol_db);
+    }
+    this.formData.append('work_name', form['work_name']);
+    this.formData.append('work_decs', form['work_decs']);
     this.formData.append('pdb_file', this.targetFile);
     this.formData.append('lig_file', this.ligandFile);
-    this.rest.postData(`autoduck2s/`, this.formData)
+    this.rest.postData(`virtualscreen2orders/`, this.formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -80,6 +105,15 @@ export class OnlineScreening2Component implements OnInit {
           alert('任务提交失败，请重新尝试！');
         }
       );
+  }
+
+  openSnackBar() {
+    if (this.currentUser) { return; }
+    this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
   }
 
 }

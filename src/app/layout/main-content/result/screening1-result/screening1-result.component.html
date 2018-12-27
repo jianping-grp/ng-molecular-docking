@@ -1,0 +1,164 @@
+<div class="table-section-container">
+  <div *ngIf="isLoading" class="table-loading-container">
+    <mat-progress-bar mode="query" color="accent"></mat-progress-bar>
+    <!--todo: loading error-->
+  </div>
+  <mat-table #screeningTable [dataSource]="dataSource"
+             class="data-table mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+             matSort
+  >
+    <ng-container matColumnDef="work_name">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >任务名称*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.work_name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="work_decs">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >任务描述*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.work_decs}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="size_x">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Size_X*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.size_x}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="size_y">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Size_Y*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.size_y}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="size_z">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Size_Z*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.size_z}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="center_X">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Center_X*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.center_x}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="center_y">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Center_Y*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.center_y}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="center_z">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >Ceneter_Z*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.center_z}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pdb_file">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >蛋白质文件*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary">
+          <a download="pdb_file" href="{{row.pdb_file}}">download</a>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="user_db">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >分子库*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.mol_db}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="affinity">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >用户-分子库
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary">
+          <a download="lig_file" href="{{row.user_db}}">download</a>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="add_time">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >提交时间
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.add_time}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >状态
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <ng-template *ngIf="row.status === 'completed'">
+          <button mat-button color="primary" (click)="getProteinUrlList(row.work_name)">查看结果</button>
+        </ng-template>
+        <ng-template *ngIf="row.status !== 'completed'">
+          {{row.status}}
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="pageMeta?.total_results"
+                 [pageSize]="pageMeta?.per_page"
+                 [pageSizeOptions]="pageSizeOptions"
+  >
+  </mat-paginator>
+</div>
+
+// 亲和力前十结果展示
+<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">结果</th>
+    <td *ngFor="let result1 of screenResultList">
+      <button mat-button color="primary" (click)="displayResult(result1.path)">查看</button>
+    </td>
+  </tr>
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">亲和力</th>
+    <td *ngFor="let result2 of screenResultList">{{result2.affinity}}</td>
+  </tr>
+</table>
+
+
+<div class="litemol-div">
+  <app-litemol [targetId]="'protein'"
+               [elementId]="'screen1Result'"
+               [url]="proteinUrl"
+               [width]="'480px'"
+               [height]="'480px'"
+               [backgroundColor]="'#fff'"
+  ></app-litemol>
+</div>

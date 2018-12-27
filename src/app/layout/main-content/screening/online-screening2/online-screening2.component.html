@@ -1,4 +1,4 @@
-<form nz-form class="form" [formGroup]="screeningForm2" (submit)="onSubmit()">
+<form nz-form class="form" (click)="openSnackBar()" [formGroup]="screeningForm2" (submit)="onSubmit()">
   <nz-form-item>
     <nz-form-label [nzSpan]="8" nzRequired>任务名称</nz-form-label>
     <nz-form-control [nzSpan]="7">
@@ -28,13 +28,21 @@
       <nz-form-explain></nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+  <nz-form-item *ngIf="screeningForm2.value.mol_db === 'userDb'">
+    <nz-form-label [nzSpan]="8" [nzRequired]>用户分子库文件</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <input type="file"
+             accept=".pdb"
+             (change)="userDbFileChange($event)"
+      >
+      <span>&nbsp;请上传pdb格式的文件！</span>
+    </nz-form-control>
+  </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="8" nzRequired>蛋白质文件</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <input type="file"
              accept=".pdb"
-             ng2FileSelect
-             [uploader]="uploader"
              (change)="targetFileChange($event)"
       >
       <!--<nz-form-explain *ngIf="dockingForm.get('pdbFile').dirty && dockingForm.get('pdbFile').hasError('required')">-->

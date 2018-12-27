@@ -42,7 +42,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="8" nzRequired>手机号码</nz-form-label>
     <nz-form-control [nzSpan]="7" nzHasFeedback>
-      <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+      <nz-input-group [nzAddOnBefore]="addOnBeformTemplate">
         <ng-template #addOnBeformTemplate>
           <nz-select formControlName="phoneNumberPrefix" style="width: 70px">
             <nz-option nzLabel="+86" nzValue="+86"></nz-option>
@@ -71,7 +71,7 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="8">研究方向</nz-form-label>
     <nz-form-control [nzSpan]="7">
-      <input nz-input formControlName="researchDirction">
+      <input nz-input formControlName="researchDirection">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
