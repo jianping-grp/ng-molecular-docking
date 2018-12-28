@@ -12,10 +12,7 @@ import {NgZorroAntdModule, NZ_I18N, NzMenuDirective, NzMenuModule, zh_CN} from '
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {UserComponent} from './layout/main-content/user/user/user.component';
-import { Docking1ResultComponent } from './layout/main-content/result/docking1-result/docking1-result.component';
-import { Docking2ResultComponent } from './layout/main-content/result/docking2-result/docking2-result.component';
-import { Screening2ResultComponent } from './layout/main-content/result/screening2-result/screening2-result.component';
-import { Screening1ResultComponent } from './layout/main-content/result/screening1-result/screening1-result.component';
+import {ResultModule} from './layout/main-content/result/result.module';
 
 registerLocaleData(zh);
 
@@ -23,10 +20,6 @@ registerLocaleData(zh);
   declarations: [
     AppComponent,
     UserComponent,
-    Docking1ResultComponent,
-    Docking2ResultComponent,
-    Screening2ResultComponent,
-    Screening1ResultComponent,
   ],
   imports: [
     CoreModule,

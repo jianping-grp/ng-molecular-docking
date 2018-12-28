@@ -16,6 +16,12 @@ import {SharedModule} from '../../../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+  ],
+  exports: [
+    // Docking1ResultComponent,
+    // Docking2ResultComponent,
+    // Screening1ResultComponent,
+    // Screening2ResultComponent
   ]
 })
-export class RusultModule { }
+export class ResultModule { }

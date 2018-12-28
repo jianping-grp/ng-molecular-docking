@@ -10,6 +10,8 @@ import {SharedModule} from '../../../shared/shared.module';
     SharedModule
   ],
   declarations: [HomeComponent, HelpComponent],
-  exports: [HomeComponent, HelpComponent]
+  exports: [
+    // HomeComponent, HelpComponent
+  ]
 })
 export class PageModule { }
