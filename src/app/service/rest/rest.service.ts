@@ -23,14 +23,16 @@ export class RestService {
       if (sortby !== '') {
         sortParam = `&sort[]=${sortby}`;
       }
+      page = +(page) + 1;
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.globalService.setLoading(true);
-    return this.http.get(`${this.restHost}/${url}&page=${page}&perPage=${perPage}${sortParam}`, {
+    return this.http.get(`${this.restHost}/${url}&page=${page}&page_size=${perPage}${sortParam}`, {
       headers: new HttpHeaders().set('Authorization', `Token ${storedUser['user_token']}`)
-    }).pipe(
+    })
+      //.pipe(
       // finalize(() => this.globalService.setLoading(true)),
       // catchError(this.handleError)
-  );
+ // );
   }
 
 

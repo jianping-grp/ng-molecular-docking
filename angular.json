@@ -37,8 +37,8 @@
               "src/assets/assets/css/LiteMol-plugin-light.css"
             ],
             "scripts": [
-              "node_modules/material-design-lite/material.min.js",
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/material-design-lite/material.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/assets/assets/js/LiteMol-plugin.js",
               "src/assets/assets/js/LiteMol-core.js",

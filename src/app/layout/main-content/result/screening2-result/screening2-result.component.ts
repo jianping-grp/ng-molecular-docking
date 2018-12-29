@@ -44,7 +44,7 @@ export class Screening2ResultComponent implements OnInit, AfterViewInit {
         switchMap(() => {
           this.isLoading = true;
           return this.rest.getDataList(
-            'virtualscreen2orders',
+            'virtualscreen2orders/?',
             this.paginator.pageIndex,
             this.paginator.pageSize,
             this.sort.direction === 'desc' ? `-${this.sort.active}` : this.sort.active,
@@ -72,7 +72,7 @@ export class Screening2ResultComponent implements OnInit, AfterViewInit {
   }
 
   getProteinUrlList(workName: string): void {
-    this.rest.getDataList(`screen/?filter{work_name}=${workName}&filter{screen_cat}=screen2`, 0, 10, '-affinity')
+    this.rest.getDataList(`screens/?filter{work_name}=${workName}&filter{screen_cat}=screen2`, 0, 10, '-affinity')
       .subscribe(data => {
         this.screenResultList = data['screens'];
       });

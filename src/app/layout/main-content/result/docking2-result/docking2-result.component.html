@@ -37,8 +37,6 @@
     </ng-container>
     <ng-container matColumnDef="pdb_file">
       <mat-header-cell *matHeaderCellDef
-                       mat-sort-header
-                       disableClear="true"
       >蛋白质文件*
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
@@ -49,8 +47,6 @@
     </ng-container>
     <ng-container matColumnDef="lig_file">
       <mat-header-cell *matHeaderCellDef
-                       mat-sort-header
-                       disableClear="true"
       >配体文件*
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
@@ -61,8 +57,6 @@
     </ng-container>
     <ng-container matColumnDef="affinity">
       <mat-header-cell *matHeaderCellDef
-                       mat-sort-header
-                       disableClear="true"
       >亲和力*
       </mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.affinity}}</mat-cell>
@@ -71,7 +65,7 @@
       <mat-header-cell *matHeaderCellDef
                        mat-sort-header
                        disableClear="true"
-      >提交时间
+      >提交时间*
       </mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.add_time}}</mat-cell>
     </ng-container>
@@ -82,12 +76,8 @@
       >状态
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <ng-template *ngIf="row.status === 'completed'">
-          <button mat-button color="primary" (click)="displayResult(row.out_path)">查看结果</button>
-        </ng-template>
-        <ng-template *ngIf="row.status !== 'completed'">
-          {{row.status}}
-        </ng-template>
+        <button *ngIf="row.status === 'completed'" mat-button color="primary" (click)="displayResult(row.out_path)">查看结果</button>
+        <button *ngIf="row.status !== 'completed'" mat-button color="primary">{{row.status}}</button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -103,8 +93,8 @@
   <app-litemol [targetId]="'protein'"
                [elementId]="'docking2Result'"
                [url]="proteinUrl"
-               [width]="'480px'"
-               [height]="'480px'"
+               [width]="'720px'"
+               [height]="'720px'"
                [backgroundColor]="'#fff'"
   ></app-litemol>
 </div>

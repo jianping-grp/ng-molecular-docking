@@ -37,7 +37,7 @@ export class OnlineDockingComponent implements OnInit {
     this.dockingForm = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      mol_db: ['', [Validators.required]],
+      //mol_db: ['', [Validators.required]],
       size_x: ['', [Validators.required]],
       size_y: ['', [Validators.required]],
       size_z: ['', [Validators.required]],
@@ -91,6 +91,12 @@ export class OnlineDockingComponent implements OnInit {
   }
 
   submitForm($event, value): void {
+    // 用户未登录时提示登录
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
+
     // 判断是否纯在文件以及文件的格式是否是pdb格式；
     if (!this.pdbTargetFile || !this.isPdbFile(this.pdbTargetFile)) {
       alert('请上传pdb格式的文件！');
@@ -104,8 +110,8 @@ export class OnlineDockingComponent implements OnInit {
           this.dockingForm.controls[i].updateValueAndValidity();
         }
       } else {
-        Object.assign(this.dockingFormDate, value);
-        console.log(value);
+        // Object.assign(this.dockingFormDate, value);
+        console.log('dockingForm:', value);
         this.uploaderFile();
       }
     }
@@ -124,7 +130,7 @@ export class OnlineDockingComponent implements OnInit {
     this.formData.append('pdb_file', this.pdbTargetFile);
     this.formData.append('lig_file', this.mol2File); // todo mol2 file modify
 
-    this.rest.postData(`autoducts`, this.formData)
+    this.rest.postData(`autodocts/`, this.formData)
       .subscribe(data => {
         const res = data;
         console.log(res);
@@ -136,12 +142,16 @@ export class OnlineDockingComponent implements OnInit {
         },
         () =>  {
         //  todo add router
-        //   this.dockingForm.reset();
+          this.dockingForm.reset();
         });
   }
 
-  openSnackBar() {
+  openTooltip() {
     if (this.currentUser) { return; }
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
     this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
       duration: 5000,
       verticalPosition: 'top',

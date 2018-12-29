@@ -41,7 +41,7 @@ export class Docking2ResultComponent implements OnInit, AfterViewInit {
         switchMap(() => {
           this.isLoading = true;
           return this.rest.getDataList(
-            'autodock2orders',
+            'autodock2orders/?',
             this.paginator.pageIndex,
             this.paginator.pageSize,
             this.sort.direction === 'desc' ? `-${this.sort.active}` : this.sort.active,

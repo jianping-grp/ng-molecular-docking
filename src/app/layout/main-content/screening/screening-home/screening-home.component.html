@@ -1,11 +1,11 @@
 <nz-layout style="background: #fff">
-  <nz-sider [nzWidth]="240" style="background: #fff;border-bottom: 1px solid #e8e8e8">
+  <nz-sider nzWidth="240" style="background: #fff;border-bottom: 1px solid #e8e8e8">
     <ul nz-menu>
-      <li nz-menu-item class="li-style" [routerLink]="['screening']" routerLinkActive="active">虚拟筛选</li>
-      <li nz-menu-item class="li-style" [routerLink]="['screening-platform-introduction']">平台简介</li>
-      <li nz-menu-item class="li-style" [routerLink]="['screening-library-introduction']">对接库介绍</li>
-      <li nz-menu-item class="li-style" [routerLink]="['screening-document']">帮助文档</li>
-      <li nz-menu-item class="li-style">查看任务</li>
+      <li nz-menu-item class="li-style" routerLink="screening" routerLinkActive="active">虚拟筛选</li>
+      <li nz-menu-item class="li-style" routerLink="screening-platform-introduction">平台简介</li>
+      <li nz-menu-item class="li-style" routerLink="screening-library-introduction">对接库介绍</li>
+      <li nz-menu-item class="li-style" routerLink="screening-document">帮助文档</li>
+      <li nz-menu-item class="li-style" routerLink="/user/user-record">查看任务</li>
       <li nz-menu-item class="li-style">查看订单</li>
     </ul>
   </nz-sider>

@@ -23,7 +23,7 @@ export class OnlineDocking2Component implements OnInit {
     this.dockingForm2 = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      mol_db: ['', [Validators.required]],
+      //mol_db: ['', [Validators.required]],
     });
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = storedUser;
@@ -64,6 +64,11 @@ export class OnlineDocking2Component implements OnInit {
 
 
   onSubmit() {
+    // 用户未登录时提示
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
     if (!this.targetFile || !this.isPdbFile(this.targetFile)) {
       alert('请上传pdb格式的文件!');
     } else if (!this.ligandFile || !this.isPdbFile(this.ligandFile)) {
@@ -78,6 +83,7 @@ export class OnlineDocking2Component implements OnInit {
           this.dockingForm2.controls[i].updateValueAndValidity();
         }
       } else {
+        console.log('file submit!');
         this.formSubmit();
       }
     }
@@ -91,7 +97,7 @@ export class OnlineDocking2Component implements OnInit {
     this.formData.append('pdb_file', this.targetFile);
     this.formData.append('lig_file', this.ligandFile);
     this.formData.append('resi_file', this.mol2File); // todo modify mol2file
-    this.rest.postData(`autoduck2s/`, this.formData)
+    this.rest.postData(`autodock2s/`, this.formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -104,12 +110,17 @@ export class OnlineDocking2Component implements OnInit {
         },
         () => {
         // todo add router
+          this.dockingForm2.reset();
         }
       );
   }
 
-  openSnackBar() {
+  openTooltip() {
     if (this.currentUser) { return; }
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
     this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
       duration: 5000,
       verticalPosition: 'top',

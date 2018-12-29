@@ -24,7 +24,7 @@ export class OnlineScreening2Component implements OnInit {
     this.screeningForm2 = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      mol_db: ['', [Validators.required]],
+      mol_db: ['zinc', [Validators.required]],
     });
 
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -40,7 +40,7 @@ export class OnlineScreening2Component implements OnInit {
 
   userDbFileChange(event) {
     this.userDbFile = event.target.files[0];
-    if (this.isPdbFile(this.userDbFile)) {
+    if (!this.isPdbFile(this.userDbFile)) {
       alert('请上传pdb格式的文件！');
     }
   }
@@ -59,6 +59,11 @@ export class OnlineScreening2Component implements OnInit {
   }
 
   onSubmit() {
+    // 用户未陆陆,提醒用户登录
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
     // 判断是否纯在文件以及文件的格式是否是pdb格式；
     if (this.screeningForm2.value.mol_db === 'userDb') {
       if (!this.userDbFile || !this.isPdbFile(this.userDbFile)) {
@@ -78,6 +83,7 @@ export class OnlineScreening2Component implements OnInit {
           this.screeningForm2.controls[i].updateValueAndValidity();
         }
       } else {
+        // 传传文件
         this.formSubmit();
       }
     }
@@ -87,14 +93,17 @@ export class OnlineScreening2Component implements OnInit {
     const form = this.screeningForm2.value;
     if (form.mol_db === 'userDb') {
       this.formData.append('user_db', this.userDbFile);
+      //this.formData.append('mol_db', 'user_db_file');
     } else {
-      this.formData.append('mol_db', form.mol_db);
+      this.formData.append('mol_db', form['mol_db']);
+      //this.formData.append('user_db', null);
     }
     this.formData.append('work_name', form['work_name']);
     this.formData.append('work_decs', form['work_decs']);
     this.formData.append('pdb_file', this.targetFile);
-    this.formData.append('lig_file', this.ligandFile);
-    this.rest.postData(`virtualscreen2orders/`, this.formData)
+    this.formData.append('resi_file', this.ligandFile);
+    console.log('formdata:', this.formData, 'form:', form,this.formData.getAll('mol_db'));
+    this.rest.postData(`virtualscreen2s/`, this.formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -103,12 +112,19 @@ export class OnlineScreening2Component implements OnInit {
         },
         error2 => {
           alert('任务提交失败，请重新尝试！');
+        },
+        () => {
+          this.screeningForm2.reset();
         }
       );
   }
 
-  openSnackBar() {
+  openTooltip() {
     if (this.currentUser) { return; }
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
     this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
       duration: 5000,
       verticalPosition: 'top',

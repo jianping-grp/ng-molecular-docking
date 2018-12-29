@@ -48,6 +48,11 @@ export class OnlineScreeningComponent implements OnInit {
 
 
   onSubmit(): void {
+    // 用户未录录示示陆陆
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
     // 判断是否纯在文件以及文件的格式是否是pdb格式；
     if (this.screeningForm.value.mol_db === 'userDb') {
       if (!this.userDbFile || !this.isPdbFile(this.userDbFile)) {
@@ -67,6 +72,7 @@ export class OnlineScreeningComponent implements OnInit {
       } else {
         // console.log(value);
         // this.uploaderFile();
+        // 上传文件
         this.formSubmit();
       }
     }
@@ -89,14 +95,14 @@ export class OnlineScreeningComponent implements OnInit {
 
   pdbTargetFileChange(event) {
     this.pdbTargetFile = event.target.files[0];
-    if (this.isPdbFile(this.pdbTargetFile)) {
+    if (!this.isPdbFile(this.pdbTargetFile)) {
       alert('请上传pdb格式的文件！');
     }
   }
 
   userDbFileChange(event) {
     this.userDbFile = event.target.files[0];
-    if (this.isPdbFile(this.userDbFile)) {
+    if (!this.isPdbFile(this.userDbFile)) {
       alert('请上传pdb格式的文件！');
     }
   }
@@ -112,18 +118,18 @@ export class OnlineScreeningComponent implements OnInit {
     if (form.mol_db === 'userDb') {
       this.formData.append('user_db', this.userDbFile);
     } else {
-      this.formData.append('mol_db', form.mol_db);
+      this.formData.append('mol_db', form['mol_db']);
     }
     this.formData.append('work_name', form.work_name);
     this.formData.append('work_desc', form.work_decs);
-    this.formData.append('size_x', form.size_x);
-    this.formData.append('size_y', form.size_y);
-    this.formData.append('size_z', form.size_z);
-    this.formData.append('center_x', form.center_x);
-    this.formData.append('center_y', form.center_y);
-    this.formData.append('center_z', form.center_z);
+    this.formData.append('size_x', form.Size_x);
+    this.formData.append('size_y', form.Size_y);
+    this.formData.append('size_z', form.Size_z);
+    this.formData.append('center_x', form.Center_x);
+    this.formData.append('center_y', form.Center_y);
+    this.formData.append('center_z', form.Center_z);
     this.formData.append('pdb_file', this.pdbTargetFile);
-    this.rest.postData(`virtualscreenorders/`, this.formData)
+    this.rest.postData(`virtualscreens/`, this.formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -131,7 +137,11 @@ export class OnlineScreeningComponent implements OnInit {
           }
         },
         error2 => {
+          console.log('error2',error2);
           alert('任务提交失败，请重新尝试！');
+        },
+        () => {
+          this.screeningForm.reset();
         }
       );
   }

@@ -22,6 +22,7 @@ export class Docking1ResultComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   pageSizeOptions = [5, 10, 20, 50, 100];
   proteinUrl: string;
+  pageSize = 10;
   displayedColumns = [
     'work_name', 'work_decs', 'size_x', 'size_y', 'size_z', 'center_x', 'center_y', 'center_z', 'pdb_file', 'lig_file',
      'affinity', 'add_time', 'status'
@@ -32,6 +33,7 @@ export class Docking1ResultComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.pageMeta.per_page = this.pageSize;
   }
 
 
@@ -43,7 +45,7 @@ export class Docking1ResultComponent implements OnInit, AfterViewInit {
         switchMap(() => {
           this.isLoading = true;
           return this.rest.getDataList(
-            'autodockorders',
+            'autodockorders/?',
             this.paginator.pageIndex,
             this.paginator.pageSize,
             this.sort.direction === 'desc' ? `-${this.sort.active}` : this.sort.active,
@@ -53,6 +55,7 @@ export class Docking1ResultComponent implements OnInit, AfterViewInit {
           this.isLoading = false;
           this.isLoadingError = false;
           this.pageMeta = data['meta'];
+          console.log('data:', data['auto_docks']); // todo delete
           return data['auto_docks'];
         }),
         catchError(() => {
