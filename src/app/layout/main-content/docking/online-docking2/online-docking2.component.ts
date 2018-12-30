@@ -14,7 +14,6 @@ export class OnlineDocking2Component implements OnInit {
   ligandFile: File;
   mol2File: File;
   currentUser: any;
-  formData = new FormData();
   constructor(private rest: RestService,
               private fb: FormBuilder,
               public snackBar: MatSnackBar) { }
@@ -23,7 +22,7 @@ export class OnlineDocking2Component implements OnInit {
     this.dockingForm2 = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      //mol_db: ['', [Validators.required]],
+      // zmol_db: ['', [Validators.required]],
     });
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = storedUser;
@@ -91,13 +90,14 @@ export class OnlineDocking2Component implements OnInit {
 
   formSubmit() {
     const form = this.dockingForm2.value;
-    this.formData.append('work_name', form['work_name']);
-    this.formData.append('work_decs', form['work_decs']);
-    this.formData.append('mol_db', form['mol_db']);
-    this.formData.append('pdb_file', this.targetFile);
-    this.formData.append('lig_file', this.ligandFile);
-    this.formData.append('resi_file', this.mol2File); // todo modify mol2file
-    this.rest.postData(`autodock2s/`, this.formData)
+    const formData = new FormData();
+    formData.append('work_name', form['work_name']);
+    formData.append('work_decs', form['work_decs']);
+    formData.append('mol_db', form['mol_db']);
+    formData.append('pdb_file', this.targetFile);
+    formData.append('lig_file', this.ligandFile);
+    formData.append('resi_file', this.mol2File); // todo modify mol2file
+    this.rest.postData(`autodock2s/`, formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {

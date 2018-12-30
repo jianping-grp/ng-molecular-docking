@@ -15,7 +15,6 @@ export class OnlineScreening2Component implements OnInit {
   ligandFile: File;
   currentUser: any;
   userDbFile: File;
-  formData = new FormData();
   constructor(private rest: RestService,
               private fb: FormBuilder,
               private snackBar: MatSnackBar) { }
@@ -60,10 +59,10 @@ export class OnlineScreening2Component implements OnInit {
 
   onSubmit() {
     // 用户未陆陆,提醒用户登录
-    if (!this.currentUser) {
-      this.openSnackBar();
-      return;
-    }
+    // if (!this.currentUser) {
+    //   this.openSnackBar();
+    //   return;
+    // }
     // 判断是否纯在文件以及文件的格式是否是pdb格式；
     if (this.screeningForm2.value.mol_db === 'userDb') {
       if (!this.userDbFile || !this.isPdbFile(this.userDbFile)) {
@@ -91,32 +90,31 @@ export class OnlineScreening2Component implements OnInit {
 
   formSubmit() {
     const form = this.screeningForm2.value;
+    const formData = new FormData();
     if (form.mol_db === 'userDb') {
-      this.formData.append('user_db', this.userDbFile);
-      //this.formData.append('mol_db', 'user_db_file');
+      formData.append('user_db', this.userDbFile);
     } else {
-      this.formData.append('mol_db', form['mol_db']);
-      //this.formData.append('user_db', null);
+      formData.append('mol_db', form['mol_db']);
     }
-    this.formData.append('work_name', form['work_name']);
-    this.formData.append('work_decs', form['work_decs']);
-    this.formData.append('pdb_file', this.targetFile);
-    this.formData.append('resi_file', this.ligandFile);
-    console.log('formdata:', this.formData, 'form:', form,this.formData.getAll('mol_db'));
-    this.rest.postData(`virtualscreen2s/`, this.formData)
-      .subscribe((res: Response) => {
-          const temsRes = res;
-          if (temsRes) {
-            alert('任务提交成功!');
-          }
-        },
-        error2 => {
-          alert('任务提交失败，请重新尝试！');
-        },
-        () => {
-          this.screeningForm2.reset();
-        }
-      );
+    formData.append('work_name', form['work_name']);
+    formData.append('work_decs', form['work_decs']);
+    formData.append('pdb_file', this.targetFile);
+    formData.append('resi_file', this.ligandFile);
+    console.log('formdata:', formData, 'form:', form, formData.getAll('mol_db'));
+    // this.rest.postData(`virtualscreen2s/`, formData)
+    //   .subscribe((res: Response) => {
+    //       const temsRes = res;
+    //       if (temsRes) {
+    //         alert('任务提交成功!');
+    //       }
+    //     },
+    //     error2 => {
+    //       alert('任务提交失败，请重新尝试！');
+    //     },
+    //     () => {
+    //       this.screeningForm2.reset();
+    //     }
+    //   );
   }
 
   openTooltip() {

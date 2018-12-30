@@ -14,16 +14,14 @@ import {MatSnackBar} from '@angular/material';
 })
 export class OnlineDockingComponent implements OnInit {
   dockingForm: FormGroup;
-  dockingFormDate: object = {user: 1};
   pdbTargetFile: File;
   mol2File: File;
-  formData = new FormData();
   currentUser: any;
-  public uploader: FileUploader = new FileUploader({
-    url: `${environment.REST_HOST}/autoducts/`, // todo modify
-    method: 'POST',
-    itemAlias: 'pdb_file'
-  });
+  // public uploader: FileUploader = new FileUploader({
+  //   url: `${environment.REST_HOST}/autoducts/`, // todo modify
+  //   method: 'POST',
+  //   itemAlias: 'pdb_file'
+  // });
 
   constructor(private fb: FormBuilder,
               private rest: RestService,
@@ -37,7 +35,7 @@ export class OnlineDockingComponent implements OnInit {
     this.dockingForm = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      //mol_db: ['', [Validators.required]],
+      // mol_db: ['', [Validators.required]],
       size_x: ['', [Validators.required]],
       size_y: ['', [Validators.required]],
       size_z: ['', [Validators.required]],
@@ -119,18 +117,18 @@ export class OnlineDockingComponent implements OnInit {
 
   uploaderFile() {
     const form = this.dockingForm.value;
-    this.formData.append('work_name', form.work_name);
-    this.formData.append('work_desc', form.work_decs);
-    this.formData.append('size_x', form.size_x);
-    this.formData.append('size_y', form.size_y);
-    this.formData.append('size_z', form.size_z);
-    this.formData.append('center_x', form.center_x);
-    this.formData.append('center_y', form.center_y);
-    this.formData.append('center_z', form.center_z);
-    this.formData.append('pdb_file', this.pdbTargetFile);
-    this.formData.append('lig_file', this.mol2File); // todo mol2 file modify
-
-    this.rest.postData(`autodocts/`, this.formData)
+    const formData = new FormData();
+    formData.append('work_name', form.work_name);
+    formData.append('work_desc', form.work_decs);
+    formData.append('size_x', form.size_x);
+    formData.append('size_y', form.size_y);
+    formData.append('size_z', form.size_z);
+    formData.append('center_x', form.center_x);
+    formData.append('center_y', form.center_y);
+    formData.append('center_z', form.center_z);
+    formData.append('pdb_file', this.pdbTargetFile);
+    formData.append('lig_file', this.mol2File); // todo mol2 file modify
+    this.rest.postData(`autodocts/`, formData)
       .subscribe(data => {
         const res = data;
         console.log(res);

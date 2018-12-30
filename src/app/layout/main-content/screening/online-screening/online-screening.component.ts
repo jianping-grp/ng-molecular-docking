@@ -13,7 +13,6 @@ import {RestService} from '../../../../service/rest/rest.service';
 })
 export class OnlineScreeningComponent implements OnInit {
   screeningForm: FormGroup;
-  formData = new FormData();
   pdbTargetFile: File;
   userDbFile: File;
   currentUser: any;
@@ -115,21 +114,22 @@ export class OnlineScreeningComponent implements OnInit {
 
   formSubmit() {
     const form = this.screeningForm.value;
+    const formData = new FormData();
     if (form.mol_db === 'userDb') {
-      this.formData.append('user_db', this.userDbFile);
+      formData.append('user_db', this.userDbFile);
     } else {
-      this.formData.append('mol_db', form['mol_db']);
+      formData.append('mol_db', form['mol_db']);
     }
-    this.formData.append('work_name', form.work_name);
-    this.formData.append('work_desc', form.work_decs);
-    this.formData.append('size_x', form.Size_x);
-    this.formData.append('size_y', form.Size_y);
-    this.formData.append('size_z', form.Size_z);
-    this.formData.append('center_x', form.Center_x);
-    this.formData.append('center_y', form.Center_y);
-    this.formData.append('center_z', form.Center_z);
-    this.formData.append('pdb_file', this.pdbTargetFile);
-    this.rest.postData(`virtualscreens/`, this.formData)
+    formData.append('work_name', form.work_name);
+    formData.append('work_desc', form.work_decs);
+    formData.append('size_x', form.Size_x);
+    formData.append('size_y', form.Size_y);
+    formData.append('size_z', form.Size_z);
+    formData.append('center_x', form.Center_x);
+    formData.append('center_y', form.Center_y);
+    formData.append('center_z', form.Center_z);
+    formData.append('pdb_file', this.pdbTargetFile);
+    this.rest.postData(`virtualscreens/`, formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -137,7 +137,7 @@ export class OnlineScreeningComponent implements OnInit {
           }
         },
         error2 => {
-          console.log('error2',error2);
+          console.log('error2', error2);
           alert('任务提交失败，请重新尝试！');
         },
         () => {
