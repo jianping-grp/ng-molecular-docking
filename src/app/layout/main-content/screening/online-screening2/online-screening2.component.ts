@@ -109,7 +109,9 @@ export class OnlineScreening2Component implements OnInit {
           }
         },
         error2 => {
-          alert('任务提交失败，请重新尝试！');
+          console.log('error:', error2);
+          // alert('任务提交失败，请重新尝试！');
+          alert(`${error2['error']['work_name'] ? error2['error']['work_name'] : '任务提交失败，请重新尝试！'}`);
         },
         () => {
           this.screeningForm2.reset();

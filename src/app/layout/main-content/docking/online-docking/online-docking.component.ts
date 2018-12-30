@@ -135,8 +135,8 @@ export class OnlineDockingComponent implements OnInit {
         alert('任务提交成功！');  // todo add document
       },
         error2 => {
-        console.log(error2.message);
-        alert('任务提交失败！'); // todo add
+          alert(`${error2['error']['work_name'] ? error2['error']['work_name'] : '任务提交失败，请重新尝试！'}`);
+          // alert('任务提交失败！'); // todo add
         },
         () =>  {
         //  todo add router
