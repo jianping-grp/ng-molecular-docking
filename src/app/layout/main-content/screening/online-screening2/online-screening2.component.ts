@@ -59,10 +59,10 @@ export class OnlineScreening2Component implements OnInit {
 
   onSubmit() {
     // 用户未陆陆,提醒用户登录
-    // if (!this.currentUser) {
-    //   this.openSnackBar();
-    //   return;
-    // }
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
     // 判断是否纯在文件以及文件的格式是否是pdb格式；
     if (this.screeningForm2.value.mol_db === 'userDb') {
       if (!this.userDbFile || !this.isPdbFile(this.userDbFile)) {
@@ -101,20 +101,20 @@ export class OnlineScreening2Component implements OnInit {
     formData.append('pdb_file', this.targetFile);
     formData.append('resi_file', this.ligandFile);
     console.log('formdata:', formData, 'form:', form, formData.getAll('mol_db'));
-    // this.rest.postData(`virtualscreen2s/`, formData)
-    //   .subscribe((res: Response) => {
-    //       const temsRes = res;
-    //       if (temsRes) {
-    //         alert('任务提交成功!');
-    //       }
-    //     },
-    //     error2 => {
-    //       alert('任务提交失败，请重新尝试！');
-    //     },
-    //     () => {
-    //       this.screeningForm2.reset();
-    //     }
-    //   );
+    this.rest.postData(`virtualscreen2s/`, formData)
+      .subscribe((res: Response) => {
+          const temsRes = res;
+          if (temsRes) {
+            alert('任务提交成功!');
+          }
+        },
+        error2 => {
+          alert('任务提交失败，请重新尝试！');
+        },
+        () => {
+          this.screeningForm2.reset();
+        }
+      );
   }
 
   openTooltip() {
