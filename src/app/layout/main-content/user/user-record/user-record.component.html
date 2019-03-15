@@ -1,1 +1,19 @@
-<form></form>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     [routerLink]="'docking1-result'"
+     routerLinkActive #rat="routerLinkActive"
+     [active]="rat.isActive">Docking1</a>
+  <a mat-tab-link
+  [routerLink]="'docking2-result'"
+  routerLinkActive #rag="routerLinkActive"
+  [active]="rag.isActive">Docking2</a>
+  <a mat-tab-link
+  [routerLink]="'screening1-result'"
+  routerLinkActive #rtn="routerLinkActive"
+  [active]="rtn.isActive">Screening1</a>
+  <a mat-tab-link
+     [routerLink]="'screening2-result'"
+     routerLinkActive #rmmp="routerLinkActive"
+     [active]="rmmp.isActive">Screening2</a>
+</nav>
+<router-outlet></router-outlet>

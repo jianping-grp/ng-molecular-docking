@@ -18,16 +18,23 @@ export class RestService {
 
   }
 
-  public  getDataList(url: string) {
+  public  getDataList(url: string, page = 0, perPage = 10, sortby = '') {
+    let sortParam = '';
+      if (sortby !== '') {
+        sortParam = `&sort[]=${sortby}`;
+      }
+      page = +(page) + 1;
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.globalService.setLoading(true);
-    return this.http.get(`${this.restHost}/${url}`, {
+    return this.http.get(`${this.restHost}/${url}&page=${page}&page_size=${perPage}${sortParam}`, {
       headers: new HttpHeaders().set('Authorization', `Token ${storedUser['user_token']}`)
-    }).pipe(
-      finalize(() => this.globalService.setLoading(true)),
-      catchError(this.handleError)
-  );
+    })
+      //.pipe(
+      // finalize(() => this.globalService.setLoading(true)),
+      // catchError(this.handleError)
+ // );
   }
+
 
   public postData(url: string, body: object, ): Observable<any> {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));

@@ -12,6 +12,7 @@ import {NgZorroAntdModule, NZ_I18N, NzMenuDirective, NzMenuModule, zh_CN} from '
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import {UserComponent} from './layout/main-content/user/user/user.component';
+import {ResultModule} from './layout/main-content/result/result.module';
 
 registerLocaleData(zh);
 

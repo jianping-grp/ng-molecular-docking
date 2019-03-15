@@ -25,7 +25,7 @@ export class UserRecordComponent implements OnInit {
   getDockingRecord() {
     this.rest.getDataList(`autodockorders`)
       .subscribe(data => {
-         this.dockingList = data['results'];
+         this.dockingList = data['auto_docks'];
       });
   }
 

@@ -8,7 +8,7 @@ import {
   MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule,
   MatSelectModule,
   MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSortModule,
-  MatTableModule, MatTabsModule,
+  MatTableModule, MatTabsModule, MatSnackBarModule,
   MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
@@ -45,6 +45,7 @@ import {LitemolModule} from './litemol/litemol.module';
     MatSelectModule,
     MatRadioModule,
     MatSliderModule,
+    MatSnackBarModule,
     MatSlideToggleModule,
 
   ],
@@ -76,6 +77,7 @@ import {LitemolModule} from './litemol/litemol.module';
     MatDialogModule,
     MatRadioModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatSlideToggleModule,
     MatSliderModule,
   ],

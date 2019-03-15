@@ -1,4 +1,4 @@
-<form nz-form class="form" [formGroup]="dockingForm2" (submit)="onSubmit()">
+<form nz-form class="form"  (click)="openTooltip()" [formGroup]="dockingForm2" (submit)="onSubmit()">
   <nz-form-item>
     <nz-form-label [nzSpan]="8" nzRequired>任务名称</nz-form-label>
     <nz-form-control [nzSpan]="7">
@@ -45,7 +45,7 @@
     <nz-form-label [nzSpan]="8" nzRequired>残基文件</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <input type="file"
-             accept=".pdf"
+             accept=".pdb"
              (change)="ligandFileChange($event)"
       >
       <span>&nbsp;请上传pdb格式的文件！</span>

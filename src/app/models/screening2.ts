@@ -8,4 +8,7 @@ export interface Screening2 {
   price?: string;
   status?: string;
   add_time?: string;
+  user_db?: string;
+  user?: string;
+
 }

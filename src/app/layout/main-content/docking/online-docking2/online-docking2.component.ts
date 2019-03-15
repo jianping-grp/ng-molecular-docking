@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RestService} from '../../../../service/rest/rest.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-online-docking2',
@@ -12,16 +13,19 @@ export class OnlineDocking2Component implements OnInit {
   targetFile: File;
   ligandFile: File;
   mol2File: File;
-  formData = new FormData();
+  currentUser: any;
   constructor(private rest: RestService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.dockingForm2 = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      mol_db: ['', [Validators.required]],
+      // zmol_db: ['', [Validators.required]],
     });
+    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = storedUser;
   }
 
   targetFileChange(event) {
@@ -59,6 +63,11 @@ export class OnlineDocking2Component implements OnInit {
 
 
   onSubmit() {
+    // 用户未登录时提示
+    if (!this.currentUser) {
+      this.openSnackBar();
+      return;
+    }
     if (!this.targetFile || !this.isPdbFile(this.targetFile)) {
       alert('请上传pdb格式的文件!');
     } else if (!this.ligandFile || !this.isPdbFile(this.ligandFile)) {
@@ -73,6 +82,7 @@ export class OnlineDocking2Component implements OnInit {
           this.dockingForm2.controls[i].updateValueAndValidity();
         }
       } else {
+        console.log('file submit!');
         this.formSubmit();
       }
     }
@@ -80,13 +90,14 @@ export class OnlineDocking2Component implements OnInit {
 
   formSubmit() {
     const form = this.dockingForm2.value;
-    this.formData.append('work_name', form['work_name']);
-    this.formData.append('work_decs', form['work_decs']);
-    this.formData.append('mol_db', form['mol_db']);
-    this.formData.append('pdb_file', this.targetFile);
-    this.formData.append('lig_file', this.ligandFile);
-    this.formData.append('resi_file', this.mol2File); // todo modify mol2file
-    this.rest.postData(`autoduck2s/`, this.formData)
+    const formData = new FormData();
+    formData.append('work_name', form['work_name']);
+    formData.append('work_decs', form['work_decs']);
+    formData.append('mol_db', form['mol_db']);
+    formData.append('pdb_file', this.targetFile);
+    formData.append('lig_file', this.ligandFile);
+    formData.append('resi_file', this.mol2File); // todo modify mol2file
+    this.rest.postData(`autodock2s/`, formData)
       .subscribe((res: Response) => {
           const temsRes = res;
           if (temsRes) {
@@ -94,12 +105,26 @@ export class OnlineDocking2Component implements OnInit {
           }
         },
         error2 => {
-          console.log(error2.message);
-          alert('任务提交失败，请重新尝试！');
+          alert(`${error2['error']['work_name'] ? error2['error']['work_name'] : '任务提交失败，请重新尝试！'}`);
+          // alert('任务提交失败，请重新尝试！');
         },
         () => {
         // todo add router
+          this.dockingForm2.reset();
         }
       );
+  }
+
+  openTooltip() {
+    if (this.currentUser) { return; }
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
   }
 }

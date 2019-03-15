@@ -7,6 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {UserRoutingModule} from './user-routing.module';
+import {ResultModule} from '../result/result.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {UserRoutingModule} from './user-routing.module';
   imports: [
     CommonModule,
     SharedModule,
+    ResultModule,
     UserRoutingModule
   ]
 })

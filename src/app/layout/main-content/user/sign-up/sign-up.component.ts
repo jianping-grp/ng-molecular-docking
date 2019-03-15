@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(/\w+@\w+\.\w+/)]],
       companyName: [''],
       name: [''],
-      researchDirction: ['']
+      researchDirection: ['']
     });
   }
 

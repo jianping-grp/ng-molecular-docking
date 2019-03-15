@@ -1,0 +1,113 @@
+<div class="table-section-container">
+  <div *ngIf="isLoading || isLoadingError" class="table-loading-container">
+    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+    <!--todo: loading error-->
+  </div>
+  <mat-table #screening2Table [dataSource]="dataSource"
+             class="data-table mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+             matSort
+  >
+    <ng-container matColumnDef="work_name">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >任务名称*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.work_name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="work_decs">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >任务描述*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.work_decs}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pdb_file">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >蛋白质文件
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary">
+          <a download="pdb_file" href="{{row.pdb_file}}">download</a>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mol_db">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >分子库
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.mol_db}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="user_db">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >用户-分子库
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button color="primary">
+          <a *ngIf="row.user_db" download="lig_file" href="{{row.user_db}}">download</a>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="add_time">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >提交时间*
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.add_time}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef
+                       mat-sort-header
+                       disableClear="true"
+      >状态
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button *ngIf="row.status === 'completed'" mat-button color="primary" (click)="getProteinUrlList(row.work_name)">查看结果</button>
+        <button *ngIf="row.status !== 'completed'" mat-button color="primary">{{row.status}}</button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="pageMeta?.total_results"
+                 [pageSize]="pageMeta?.per_page"
+                 [pageSizeOptions]="pageSizeOptions"
+  >
+  </mat-paginator>
+</div>
+
+<!--亲和力前十结果展示-->
+<table *ngIf="screenResultList" class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">亲和力</th>
+    <td class="mdl-data-table__cell--non-numeric" *ngFor="let result2 of screenResultList">{{result2.affinity}}</td>
+  </tr>
+  <tr>
+    <th class="mdl-data-table__cell--non-numeric">结果</th>
+    <td class="mdl-data-table__cell--non-numeric" *ngFor="let result1 of screenResultList">
+      <button mat-button color="primary" (click)="displayResult(result1.path)">查看</button>
+    </td>
+  </tr>
+</table>
+
+
+<div class="litemol-div">
+  <app-litemol [targetId]="'protein'"
+               [elementId]="'screen2Result'"
+               [url]="proteinUrl"
+               [width]="'720px'"
+               [height]="'720px'"
+               [backgroundColor]="'#fff'"
+  ></app-litemol>
+</div>

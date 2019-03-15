@@ -11,5 +11,8 @@ export interface Docking {
   pdb_file?: string;
   lig_file?: string;
   status?: string;
+  out_file?: string;
   add_time?: string;
+  affinity?: string;
+  user?: string;
 }

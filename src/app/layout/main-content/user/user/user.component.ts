@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     this.currentUser = storedUser;
     this.username = storedUser ? storedUser['user_name'] : null;
-    console.log('user, storedUser', storedUser);
+    // console.log('user, storedUser', storedUser);
     this.rest.currentUser.subscribe(
       user => {
         this.currentUser = user;

@@ -13,4 +13,6 @@ export interface Screening {
   user_db?: string;
   status?: string;
   add_time?: string;
+  price?: string;
+  user?: string;
 }
