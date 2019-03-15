@@ -30,6 +30,21 @@
           <nz-form-explain></nz-form-explain>
         </nz-form-control>
       </nz-form-item>
+<!--todo 修改靶点选择-->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="8" nzRequired>靶点选择</nz-form-label>
+        <nz-form-control [nzSpan]="7">
+          <nz-select formControlName="select_target">
+            <nz-option nzLabel="CHEMBL1075021" nzValue="CHEMBL1075021"></nz-option>
+            <nz-option nzLabel="CHEMBL1075022" nzValue="CHEMBL1075022"></nz-option>
+            <nz-option nzLabel="CHEMBL1075024" nzValue="CHEMBL1075024"></nz-option>
+            <nz-option nzLabel="CHEMBL1075025" nzValue="CHEMBL1075025"></nz-option>
+            <nz-option nzLabel="CHEMBL1075028" nzValue="CHEMBL1075028"></nz-option>
+          </nz-select>
+          <nz-form-explain></nz-form-explain>
+        </nz-form-control>
+      </nz-form-item>
+
       <nz-form-item>
         <nz-form-label [nzSpan]="8">靶点空间位置</nz-form-label>
       </nz-form-item>

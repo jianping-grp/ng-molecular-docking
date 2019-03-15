@@ -25,6 +25,7 @@ export class OnlineScreeningComponent implements OnInit {
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
       mol_db: ['zinc', [Validators.required]],
+      target_select: ['CHEMBL1075021', [Validators.required]], // todo 先做样式，后面修改
       Size_x: ['', [Validators.required]],
       Size_y: ['', [Validators.required]],
       Size_z: ['', [Validators.required]],
