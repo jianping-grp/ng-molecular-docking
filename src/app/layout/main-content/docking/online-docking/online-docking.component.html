@@ -69,7 +69,7 @@
           <nz-form-explain *ngIf="dockingForm.get('center_x').dirty && dockingForm.get('center_x').hasError('required')">
             请输入中心x坐标大小！
           </nz-form-explain>
-          <span>中心x坐标Angstroms</span>
+          <span>中心x坐标</span>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -79,7 +79,7 @@
           <nz-form-explain *ngIf="dockingForm.get('center_y').dirty && dockingForm.get('center_y').hasError('required')">
             请输入中心z坐标大小！
           </nz-form-explain>
-          <span>中心y坐标Angstroms</span>
+          <span>中心y坐标</span>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -89,11 +89,11 @@
           <nz-form-explain *ngIf="dockingForm.get('center_z').dirty && dockingForm.get('center_z').hasError('required')">
             请输入中心z坐标大小！
           </nz-form-explain>
-          <span>中心z坐标Angstroms</span>
+          <span>中心z坐标</span>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="8" nzRequired>蛋白质文件</nz-form-label>
+        <nz-form-label [nzSpan]="8" nzRequired>受体文件</nz-form-label>
         <nz-form-control [nzSpan]="7">
           <input type="file"
                  accept=".pdb"

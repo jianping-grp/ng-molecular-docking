@@ -18,7 +18,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="8" nzRequired>分子库</nz-form-label>
+    <nz-form-label [nzSpan]="8" nzRequired>数据库</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <nz-select formControlName="mol_db">
         <nz-option nzLabel="zinc" nzValue=1></nz-option>
@@ -28,8 +28,23 @@
       <nz-form-explain></nz-form-explain>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
-    <nz-form-label [nzSpan]="8" nzRequired>蛋白质文件</nz-form-label>
+    <nz-form-label [nzSpan]="8" nzRequired>靶点选择</nz-form-label>
+    <nz-form-control [nzSpan]="7">
+      <nz-select formControlName="select_target">
+        <nz-option nzLabel="CHEMBL1075021" nzValue="CHEMBL1075021"></nz-option>
+        <nz-option nzLabel="CHEMBL1075022" nzValue="CHEMBL1075022"></nz-option>
+        <nz-option nzLabel="CHEMBL1075024" nzValue="CHEMBL1075024"></nz-option>
+        <nz-option nzLabel="CHEMBL1075025" nzValue="CHEMBL1075025"></nz-option>
+        <nz-option nzLabel="CHEMBL1075028" nzValue="CHEMBL1075028"></nz-option>
+      </nz-select>
+      <nz-form-explain></nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="8" nzRequired>受体文件</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <input type="file"
              accept=".pdb"

@@ -20,7 +20,8 @@ export class OnlineScreening2Component implements OnInit {
     this.screeningForm2 = this.fb.group({
       work_name: ['', [Validators.required]],
       work_decs: ['', [Validators.required]],
-      mol_db: ['', [Validators.required]],
+      mol_db: ['zinc', [Validators.required]],
+      target_select: ['CHEMBL1075021', [Validators.required]] // 先做样式，后面修改
     });
   }
 
@@ -62,11 +63,12 @@ export class OnlineScreening2Component implements OnInit {
     }
   }
 
-  formSubmit() {
+  formSubmit() { //
     const form = this.screeningForm2.value;
     this.formData.append('work_name', form['work_name'].value);
     this.formData.append('work_decs', form['work_decs'].value);
     this.formData.append('mol_db', form['mol_db'].value);
+    this.formData.append('target_select', form['target_select'].value);
     this.formData.append('pdb_file', this.targetFile);
     this.formData.append('lig_file', this.ligandFile);
     this.rest.postData(`autoduck2s/`, this.formData)

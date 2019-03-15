@@ -83,7 +83,7 @@ export class OnlineScreeningComponent implements OnInit {
     return isPdbFormat;
   }
 
-  uploaderFile() { // 文件上传到后台服务器
+  uploaderFile() { // 文件上传到后台服务器 TODO
     this.uploader.setOptions({
       additionalParameter: this.dockingFormDate
     });
