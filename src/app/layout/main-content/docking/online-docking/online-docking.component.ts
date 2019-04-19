@@ -17,11 +17,6 @@ export class OnlineDockingComponent implements OnInit {
   pdbTargetFile: File;
   mol2File: File;
   currentUser: any;
-  // public uploader: FileUploader = new FileUploader({
-  //   url: `${environment.REST_HOST}/autoducts/`, // todo modify
-  //   method: 'POST',
-  //   itemAlias: 'pdb_file'
-  // });
 
   constructor(private fb: FormBuilder,
               private rest: RestService,
@@ -128,15 +123,14 @@ export class OnlineDockingComponent implements OnInit {
     formData.append('center_z', form.center_z);
     formData.append('pdb_file', this.pdbTargetFile);
     formData.append('lig_file', this.mol2File); // todo mol2 file modify
-    this.rest.postData(`autodocts/`, formData)
+    this.rest.postData(`autodocks/`, formData)
       .subscribe(data => {
-        const res = data;
-        console.log(res);
-        alert('任务提交成功！');  // todo add document
+        // console.log('docking1Response:', data);
+        alert('任务提交成功！');
       },
         error2 => {
           alert(`${error2['error']['work_name'] ? error2['error']['work_name'] : '任务提交失败，请重新尝试！'}`);
-          // alert('任务提交失败！'); // todo add
+          // alert('任务提交失败！');
         },
         () =>  {
         //  todo add router
@@ -150,7 +144,7 @@ export class OnlineDockingComponent implements OnInit {
   }
 
   openSnackBar() {
-    this.snackBar.open('', '温馨提示： 请登陆后提交任务！', {
+    this.snackBar.open('', '温馨提示：请登陆后提交任务！', {
       duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'center'

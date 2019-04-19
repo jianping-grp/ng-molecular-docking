@@ -18,7 +18,11 @@ export class RestService {
 
   }
 
-  public  getDataList(url: string, page = 0, perPage = 10, sortby = '') {
+  public getData(url: string): Observable<any> {
+    return this.http.get(`${this.restHost}/${url}`);
+  }
+
+  public  getDataList(url: string, page = 0, perPage = 10, sortby = ''): Observable<any> {
     let sortParam = '';
       if (sortby !== '') {
         sortParam = `&sort[]=${sortby}`;
@@ -28,8 +32,8 @@ export class RestService {
     this.globalService.setLoading(true);
     return this.http.get(`${this.restHost}/${url}&page=${page}&page_size=${perPage}${sortParam}`, {
       headers: new HttpHeaders().set('Authorization', `Token ${storedUser['user_token']}`)
-    })
-      //.pipe(
+    });
+      // .pipe(
       // finalize(() => this.globalService.setLoading(true)),
       // catchError(this.handleError)
  // );

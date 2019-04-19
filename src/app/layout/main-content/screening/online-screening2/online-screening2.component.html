@@ -1,4 +1,4 @@
-<form nz-form class="form" [formGroup]="screeningForm2" (submit)="onSubmit()">
+<form nz-form class="form" (click)="openTooltip()" [formGroup]="screeningForm2" (submit)="onSubmit()">
   <nz-form-item>
     <nz-form-label [nzSpan]="8" nzRequired>任务名称</nz-form-label>
     <nz-form-control [nzSpan]="7">
@@ -21,24 +21,22 @@
     <nz-form-label [nzSpan]="8" nzRequired>数据库</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <nz-select formControlName="mol_db">
-        <nz-option nzLabel="zinc" nzValue=1></nz-option>
-        <nz-option nzLabel="chembl" nzValue=2></nz-option>
-        <nz-option nzLabel="wi" nzValue=3></nz-option>
+        <nz-option nzLabel="zinc" nzValue="zinc"></nz-option>
+        <nz-option nzLabel="chembl" nzValue="chembl"></nz-option>
+        <nz-option nzLabel="wi" nzValue="wi"></nz-option>
       </nz-select>
       <nz-form-explain></nz-form-explain>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzSpan]="8" nzRequired>靶点选择</nz-form-label>
+    <nz-form-label [nzSpan]="8">靶点选择</nz-form-label>
     <nz-form-control [nzSpan]="7">
-      <nz-select formControlName="select_target">
-        <nz-option nzLabel="CHEMBL1075021" nzValue="CHEMBL1075021"></nz-option>
-        <nz-option nzLabel="CHEMBL1075022" nzValue="CHEMBL1075022"></nz-option>
-        <nz-option nzLabel="CHEMBL1075024" nzValue="CHEMBL1075024"></nz-option>
-        <nz-option nzLabel="CHEMBL1075025" nzValue="CHEMBL1075025"></nz-option>
-        <nz-option nzLabel="CHEMBL1075028" nzValue="CHEMBL1075028"></nz-option>
-      </nz-select>
+      <nz-select formControlName="target_select">
+        <nz-option *ngFor="let target of seaTargets"
+                   [nzLabel]="target.target"
+                   [nzValue]="target.target"
+        ></nz-option> </nz-select>
       <nz-form-explain></nz-form-explain>
     </nz-form-control>
   </nz-form-item>
@@ -48,8 +46,6 @@
     <nz-form-control [nzSpan]="7">
       <input type="file"
              accept=".pdb"
-             ng2FileSelect
-             [uploader]="uploader"
              (change)="targetFileChange($event)"
       >
       <!--<nz-form-explain *ngIf="dockingForm.get('pdbFile').dirty && dockingForm.get('pdbFile').hasError('required')">-->
@@ -59,13 +55,13 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="8" nzRequired>配体文件</nz-form-label>
+    <nz-form-label [nzSpan]="8" nzRequired>残基文件</nz-form-label>
     <nz-form-control [nzSpan]="7">
       <input type="file"
-             accept=".pdf"
-             (change)="ligandFileChange($event)"
+             accept=".pdb"
+             (change)="residuesFileChange($event)"
       >
-      <span>&nbsp;请上传pdb格式的文件</span>
+      <span>&nbsp;请上传pdb格式的文件！</span>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

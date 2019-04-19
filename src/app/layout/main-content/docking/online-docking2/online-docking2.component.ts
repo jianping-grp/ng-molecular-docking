@@ -11,7 +11,7 @@ import {MatSnackBar} from '@angular/material';
 export class OnlineDocking2Component implements OnInit {
   dockingForm2: FormGroup;
   targetFile: File;
-  ligandFile: File;
+  residuesFile: File;
   mol2File: File;
   currentUser: any;
   constructor(private rest: RestService,
@@ -35,8 +35,8 @@ export class OnlineDocking2Component implements OnInit {
     }
   }
 
-  ligandFileChange(event) {
-    this.ligandFile = event.target.files[0];
+  residuesFileChange(event) {
+    this.residuesFile = event.target.files[0];
     if (!this.isPdbFile(this.targetFile)) {
       alert('请上传pdb格式的文件！');
     }
@@ -70,7 +70,7 @@ export class OnlineDocking2Component implements OnInit {
     }
     if (!this.targetFile || !this.isPdbFile(this.targetFile)) {
       alert('请上传pdb格式的文件!');
-    } else if (!this.ligandFile || !this.isPdbFile(this.ligandFile)) {
+    } else if (!this.residuesFile || !this.isPdbFile(this.residuesFile)) {
       alert('请上传pdb格式的文件！');
     } else if (!this.mol2File || !this.isMol2File(this.mol2File)) {
       alert('请上传mol2格式的文件！');
@@ -95,14 +95,12 @@ export class OnlineDocking2Component implements OnInit {
     formData.append('work_decs', form['work_decs']);
     formData.append('mol_db', form['mol_db']);
     formData.append('pdb_file', this.targetFile);
-    formData.append('lig_file', this.ligandFile);
-    formData.append('resi_file', this.mol2File); // todo modify mol2file
+    formData.append('lig_file', this.mol2File);
+    formData.append('resi_file', this.residuesFile);
     this.rest.postData(`autodock2s/`, formData)
       .subscribe((res: Response) => {
-          const temsRes = res;
-          if (temsRes) {
-            alert('任务提交成功!');
-          }
+          // console.log('docking1Response:', res);
+          alert('任务提交成功!');
         },
         error2 => {
           alert(`${error2['error']['work_name'] ? error2['error']['work_name'] : '任务提交失败，请重新尝试！'}`);
