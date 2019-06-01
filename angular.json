@@ -43,7 +43,9 @@
               "src/assets/assets/js/LiteMol-plugin.js",
               "src/assets/assets/js/LiteMol-core.js",
               "src/assets/assets/js/LiteMol-viewer.min.js",
-              "src/assets/assets/js/web.js"
+              "src/assets/assets/js/web.js",
+              "src/assets/jsme/jsme.nocache.js",
+              "src/assets/jsme/jsme.helper.js"
             ]
           },
           "configurations": {

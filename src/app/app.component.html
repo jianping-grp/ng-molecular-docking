@@ -1,19 +1,37 @@
-<mat-toolbar color="accent">
-  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  <span>
-    <h3>计算筛选信息平台</h3>
-  </span>&nbsp;&nbsp;
-  <button mat-button routerLink="home">首页</button>
-  <button mat-button [matMenuTriggerFor]="online">在线产品</button>
-    <mat-menu #online="matMenu">
-      <button mat-menu-item routerLink="docking/docking-home">分子对接</button>
-      <button mat-menu-item routerLink="screening/screening-home">虚拟筛选</button>
-    </mat-menu>
-  <button mat-button>服务与解决方案</button>
-  <button mat-button>关于我们</button>
-  <span class="toolbar-span"></span>
-  <app-user></app-user>
-</mat-toolbar>
+<!--<mat-toolbar color="accent">-->
+  <!--<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>-->
+  <!--<span>-->
+    <!--<h3>计算筛选信息平台</h3>-->
+  <!--</span>&nbsp;&nbsp;-->
+  <!--<button mat-button routerLink="home">Docking</button>-->
+  <!--<button mat-button [matMenuTriggerFor]="online">SEA</button>-->
+    <!--&lt;!&ndash; <mat-menu #online="matMenu">-->
+      <!--<button mat-menu-item routerLink="docking/docking-home">分子对接</button>-->
+      <!--<button mat-menu-item routerLink="screening/screening-home">虚拟筛选</button>-->
+    <!--</mat-menu> &ndash;&gt;-->
+  <!--<button mat-button>MM-GBSA</button>-->
+  <!--<button mat-button>Results</button>-->
+  <!--<button mat-button>Tutorial</button>-->
+  <!--<button mat-button>About us</button>-->
+  <!--<span class="toolbar-span"></span>-->
+  <!--<app-user></app-user>-->
+<!--</mat-toolbar>-->
+<!--<router-outlet></router-outlet>-->
+<nz-layout class="layout" style="margin-bottom: 10px">
+  <nz-header style="width:100%; background-color: orangered">
+    <!--<div class="logo">计算筛选信息</div>-->
+    <ul nz-menu [nzTheme]="'dark'"  [nzMode]="'horizontal'"
+        style="line-height: 64px; background-color: orangered; color: #ffffff" >
+      <li nz-menu-item style="color: #ffffff" routerLink="new-design/docking">Docking</li>
+      <li nz-menu-item style="color: #ffffff" routerLink="new-design/sea">SEA</li>
+      <li nz-menu-item style="color: #ffffff" routerLink="new-design/mm-gbsa">MM-GBSA</li>
+      <li nz-menu-item style="color: #ffffff" routerLink="new-result/result-home">Results</li>
+      <li nz-menu-item style="color: #ffffff">Tutorial</li>
+      <li nz-menu-item style="color: #ffffff">About us</li>
+      <app-user></app-user>
+    </ul>
+  </nz-header>
+</nz-layout>
 <router-outlet></router-outlet>
 <!--<nz-layout class="layout">-->
   <!--<nz-header>-->

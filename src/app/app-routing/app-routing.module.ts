@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: '../layout/main-content/user/user.module#UserModule'
+  },
+  {
+    path: 'new-design',
+    loadChildren: '../layout/new-design/design/new-design.module#NewDesignModule'
+  },
+  {
+    path: 'new-result',
+    loadChildren: '../layout/new-design/result/result.module#ResultModule'
   }
 ];
 

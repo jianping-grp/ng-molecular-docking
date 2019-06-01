@@ -1,0 +1,61 @@
+<div nz-row>
+  <form nz-form  class="form" (ngSubmit)="onSubmit(newGbsaForm)" #newGbsaForm="ngForm">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Center on select residue</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input name="resn" [(ngModel)]="gbsa.resn">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Upload your ligand</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <input type="file" accept=".mol2" (change)="ligandsFileChange($event)" name="lig_file">
+          <span>Please submit mol2 format file!</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Upload your receptor</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <input type="file" accept=".pdb" (change)="proteinFileChange($event)" name="pdb_file">
+          <span>Please submit pdb format file!</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Upload your complex</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <input type="file" accept=".pdb" (change)="complexFileChange($event)" name="pdb_file">
+          <span>Please submit pdb format file!</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Job name</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input name="work_name" [(ngModel)]="gbsa.work_name" placeholder="input your job name">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="13" nzRequired>Your email</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input name="email" [(ngModel)]="gbsa.email" placeholder="email address">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzSpan]="6" [nzOffset]="16">
+          <button nz-button style="background-color: orangered; width: 200px; border-color: orangered" [nzType]="'primary'" type="submit">Submit</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="6" [nzOffset]="2">
+      <div style="color: #54d98c">
+        If you have submitted a docking job in this sever, you can calculate the binding energy with result ID
+      </div>
+      <div style="margin-top: 150px">
+        <h2 style="text-align: center; color: orangered">Attenion</h2>
+        <p style="color: #54d98c">If you want to submit your  complex structure, You need pay attention to the atom name of ligand.
+          The atom name in ligand mol2 file must as same as it’s name in complex pdb file
+        </p>
+      </div>
+    </div>
+  </form>
+</div>

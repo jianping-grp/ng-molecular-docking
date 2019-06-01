@@ -1,0 +1,12 @@
+[nz-radio] {
+  display: block;
+}
+
+.group-input {
+  width: 32%;
+  margin: 0 1%
+}
+
+.form {
+  margin-top: 30px;
+}

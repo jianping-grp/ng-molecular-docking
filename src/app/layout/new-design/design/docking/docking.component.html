@@ -1,0 +1,94 @@
+<div nz-row>
+  <form nz-form  class="form" (ngSubmit)="onSubmit(newDockingForm)" #newDockingForm="ngForm">
+  <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="11" nzRequired>Upload your receptor</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <input type="file" accept=".pdb" (change)="proteinFileChange($event)" name="pdb_file">
+          <span>Please submit pdb format file!</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="11" nzRequired>Upload your ligands</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <input type="file" accept=".mol2" (change)="ligandsFileChange($event)" name="lig_file">
+          <span>Please submit mol2 format file!</span>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="11" nzRequired>Docking algorithm</nz-form-label>
+        <nz-form-control [nzSpan]="10">
+          <nz-radio-group [(ngModel)]="dockingModel.algorithm" name="algorithm">
+            <label nz-radio nzValue="AutoDock">Autodock</label>
+            <label nz-radio nzValue="AutoDock-vina">Autodock-vina</label>
+            <label nz-radio nzValue="Glide">Glide</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="11" nzRequired>Job Name</nz-form-label>
+        <nz-form-control [nzSpan]="9">
+          <input nz-input [(ngModel)]="dockingModel.work_name" name="work_name" placeholder="please input job name">
+        </nz-form-control>
+      </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="11" nzRequired>Your email</nz-form-label>
+      <nz-form-control [nzSpan]="9">
+        <input nz-input [(ngModel)]="dockingModel.email" name="email" placeholder="email address">
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div nz-col nzSpan="12">
+    <p><b style="color: rgba(0, 0, 0, 0.85)">Grid Parameters define:</b></p>
+    <div nz-col [nzSpan]="2">
+
+    </div>
+    <nz-form-item>
+      <!--<nz-form-label [nzSpan]="4" nzRequired>Grid Parameters define</nz-form-label>-->
+      <!--Grid Parameters define-->
+      <!--<br/>-->
+      <nz-form-control [nzSpan]="10">
+        <nz-radio-group [(ngModel)]="gpd" name="gpd">
+          <label nz-radio nzValue="residue">
+            Center on select residue:<br/>
+            <input nz-input [(ngModel)]="dockingModel.resn" name="resn" placeholder="Residue ID">
+          </label>
+          <br/>
+          <label nz-radio nzValue="Grid-center">
+            Grid center:<br/>
+            <nz-input-group>
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.size_x" class="group-input" name="size_x" placeholder="X"></nz-input-number>
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.size_y" class="group-input" name="size_y" placeholder="Y"></nz-input-number>
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.size_z" class="group-input" name="size_z" placeholder="Z"></nz-input-number>
+            </nz-input-group>
+            <br/>
+            Box dimension:<br/>
+            <nz-input-group >
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.center_x" class="group-input" name="center_x" placeholder="X-dim"></nz-input-number>
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.center_y" class="group-input" name="center_y" placeholder="Y-dim"></nz-input-number>
+              <nz-input-number [nzStep]="0.01" [(ngModel)]="dockingModel.center_z" class="group-input" name="center_z" placeholder="Z-dim"></nz-input-number>
+            </nz-input-group>
+          </label>
+          <br/>
+          <label nz-radio nzValue="referenceLigand">
+            Auto generate with reference ligand
+          </label>
+        </nz-radio-group>
+        <nz-form-item>
+          <nz-form-control>
+            <input type="file" accept=".pdb" name="reference_file"
+                   (change)="referenceLigandFileChange($event)">
+            <span>Please sumbit pdb format file!</span>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="6">
+        <button nz-button style="background-color: orangered; width: 200px; border-color: orangered" [nzType]="'primary'" type="submit">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  </form>
+</div>

@@ -13,8 +13,8 @@ import {
 } from '@angular/material';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
 import {FileUploadModule} from 'ng2-file-upload';
-import { LitemolComponent } from './litemol/litemol/litemol.component';
 import {LitemolModule} from './litemol/litemol.module';
+import {JsmeModule} from './jsme/jsme.module';
 
 @NgModule({
   imports: [
@@ -22,6 +22,7 @@ import {LitemolModule} from './litemol/litemol.module';
     FormsModule,
     ReactiveFormsModule,
     LitemolModule,
+    JsmeModule,
     NgZorroAntdModule.forRoot(),
     FileUploadModule,
     MatToolbarModule,
@@ -54,6 +55,7 @@ import {LitemolModule} from './litemol/litemol.module';
     FormsModule,
     ReactiveFormsModule,
     LitemolModule,
+    JsmeModule,
     NgZorroAntdModule,
     FileUploadModule,
     MatToolbarModule,

@@ -1,0 +1,15 @@
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     [routerLink]="'docking-result'"
+     routerLinkActive #rat="routerLinkActive"
+     [active]="rat.isActive">Docking</a>
+  <a mat-tab-link
+     [routerLink]="'sea-result'"
+     routerLinkActive #rag="routerLinkActive"
+     [active]="rag.isActive">SEA</a>
+  <a mat-tab-link
+     [routerLink]="'gbsa-result'"
+     routerLinkActive #rtn="routerLinkActive"
+     [active]="rtn.isActive">MM-GBSA</a>
+</nav>
+<router-outlet></router-outlet>
