@@ -9,6 +9,8 @@ import { DockingLibraryIntroductionComponent } from './docking-library-introduct
 import { DockingPlatformIntroductionComponent } from './docking-platform-introduction/docking-platform-introduction.component';
 import {DockingHomeComponent} from './docking-home/docking-home.component';
 import {OnlineDocking2Component} from './online-docking2/online-docking2.component';
+import{OnlineScreeningComponent} from '../screening/online-screening/online-screening.component';
+import{OnlineScreening2Component} from '../screening/online-screening2/online-screening2.component'
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import {OnlineDocking2Component} from './online-docking2/online-docking2.compone
     DockingIntroductionComponent,
     DockingLibraryIntroductionComponent,
     DockingPlatformIntroductionComponent,
-    OnlineDocking2Component
+    OnlineDocking2Component,
+    OnlineScreeningComponent,
+    OnlineScreening2Component
   ]
 })
 export class DockingModule {
