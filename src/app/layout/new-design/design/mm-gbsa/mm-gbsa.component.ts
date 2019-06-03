@@ -54,11 +54,11 @@ export class MmGbsaComponent implements OnInit {
     this.rest.postData('gbsa/', formData)
       .subscribe(data => {
           console.log('newGbsaResponse:', data);
-          alert('任务提交成功！');
+          alert('Task Submission Successful！');
         },
         error2 => {
           console.log('error', error2);
-          alert('任务提交失败！');
+          alert('Task Submission Failed！');
         },
         () => {
           newGbsaForm.reset();
