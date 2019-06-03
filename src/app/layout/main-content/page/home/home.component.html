@@ -1,6 +1,39 @@
-<p>
-  计算筛选平台的介绍，以及一些成果图片展示。
-</p>
-<div class="container">
-  计算机药物辅助设计平台
+<div class='swiper-container' >
+     
+  <div class="swiper-wrapper">
+   
+    <div class="swiper-slide" *ngFor="let image of images">
+      <img 
+      [src]="image?.image"width="100%" height="600px"></div>
+    </div>  
+
+  <div class="pagination"></div>
+  <div class="swiper-button-prev"></div> 
+  <div class="swiper-button-next"></div> 
+</div>
+<div id="jieshao">
+  <div class="jieshao">
+     <p><b>Our advantage</b></p>
+       <p><b>Do a unique design, a meticulous service</b></p>
+       <ul>
+         <li>
+             <a href="#">
+               <b>Background Introduction</b>
+                 The drug research and development information platform is one of the core scientific research and technology platforms of Tianjin International Biomedical Research Institute. It cooperates with Nankai University, Supercomputer Center and Tianyun Big Data Company to provide original biomedical information and computing solutions. It provides high-throughput drug virtual screening and drug optimization design.
+                 </a>
+         </li>
+         <li>
+             <a href="#">
+                 <b>Service Introduction</b>
+                 Based on our extensive expertise and technology, we provide our clients with protein homology modeling services in the following areas: high-quality protein homology modeling services, and drug screening and drug binding site prediction services based on homology models, molecules Docking, virtual screening, molecular dynamics simulation, network pharmacology analysis, biological information and other related content.
+               </a>
+         </li>
+         <li class="zli">
+             <a href="#">
+                 <b>R & D team</b>
+                 The drug research and development information platform team has a master's degree or above and reaches 85% of the total number. It also cooperates with Nankai University to train master's students. The members bring together computer-assisted drug design, biological information, medicinal chemistry, computational biology, software engineering and other professional fields.
+             </a>
+         </li>
+     </ul>
+</div>
 </div>

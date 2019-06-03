@@ -1,0 +1,21 @@
+.pagination{
+    position: absolute;
+    left:0;
+    text-align:center;
+    bottom:5px;
+    width:100%;
+    z-index: 10;
+}
+.swiper-pagination-switch{
+    display:inline-
+}
+#jieshao{height:650px;background-color:#F8F8F8;}
+.jieshao{width:1200px;height:550px;margin:0 auto;text-align: center;padding-top: 52px;padding-bottom: 66px;}
+.jieshao h3{font-size:21px;color:#010100;padding-bottom:20px;}
+.jieshao p{font-size:12px;color:#010100;}
+.jieshao ul{width:1200px;padding-top:30px;}
+.jieshao ul li{width:320px;height:400px;background-color:#fff;float:left;margin-right:62px;}
+.jieshao ul li a{color:#010100;display:block;padding:0 45px;font-size:15px;line-height:25px;text-decoration: none;}
+.jieshao ul li a b{color:#010100;display:block;font-size:20px;padding-bottom:12px;}
+li{list-style: none}
+a{text-decoration: none;}
