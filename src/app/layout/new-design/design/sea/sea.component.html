@@ -2,14 +2,14 @@
   <form nz-form  class="form" (ngSubmit)="onSubmit(newSeaForm)" #newSeaForm="ngForm">
     <div nz-col nzSpan="13">
       <nz-form-item>
-        <nz-form-label [nzSpan]="11" nzRequired>Upload your receptor</nz-form-label>
+        <nz-form-label [nzSpan]="11">Upload your receptor</nz-form-label>
         <nz-form-control [nzSpan]="9">
           <input type="file" accept=".pdb" (change)="proteinFileChange($event)" name="pdb_file">
           <span>Please submit pdb pdbfile!</span>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="11" nzRequired>Center on select residue</nz-form-label>
+        <nz-form-label [nzSpan]="11">Center on select residue</nz-form-label>
         <nz-form-control [nzSpan]="9">
           <input nz-input name="resn" [(ngModel)]="newSea.resn">
         </nz-form-control>
@@ -26,16 +26,17 @@
           <nz-select [(ngModel)]="newSea.mol_db" name="mol_db">
             <nz-option nzLabel="zinc" nzValue="zinc"></nz-option>
             <nz-option nzLabel="chembl" nzValue="chembl"></nz-option>
-            <nz-option nzLabel="wi" nzValue="wi"></nz-option>
-            <nz-option nzLabel="chinese-medicine" nzValue="chinese-medicine"></nz-option>
-            <nz-option nzLabel="bailingwei" nzValue="bailingwei"></nz-option>
-            <nz-option nzLabel="jianqiao" nzValue="jianqiao"></nz-option>
+            <nz-option nzLabel="DrugBank" nzValue="drugbank"></nz-option>
+            <nz-option nzLabel="中药" nzValue="chinese-medicine"></nz-option>
+            <nz-option nzLabel="桃素" nzValue="taosu"></nz-option>
+            <nz-option nzLabel="百灵威" nzValue="bailingwei"></nz-option>
+            <nz-option nzLabel="剑桥分子晶体" nzValue="jianqiao"></nz-option>
           </nz-select>
           <nz-form-explain></nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="11" nzRequired>Target select</nz-form-label>
+        <nz-form-label [nzSpan]="11">Target select</nz-form-label>
         <nz-form-control [nzSpan]="9">
           <nz-select [(ngModel)]="newSea.target" name="target">
             <nz-option *ngFor="let target of seaTargets"

@@ -16,8 +16,8 @@ export class SeaComponent implements OnInit {
   proteinFile: File;
   newSea: Sea = {
     work_name: '',
-    mol_db: 'zinc',
-    target: 'CHEMBL203',
+    mol_db: '',
+    target: '',
     smiles: '',
     pdb_file: '',
     resn: '',
@@ -52,26 +52,31 @@ export class SeaComponent implements OnInit {
     console.log('newSea:', newSeaForm);
     const form = newSeaForm.value;
     const formData = new FormData();
-
-    formData.append('pdb_file', this.proteinFile);
-    formData.append('work_name', form.work_name);
-    formData.append('email', form.email);
-    formData.append('mol_db', form.mol_db);
-    formData.append('target', form.target);
-    formData.append('smiles', form.smiles);
-    formData.append('resn', form.resn);
+    if (this.proteinFile) {
+      formData.append('email', form.email);
+      formData.append('pdb_file', this.proteinFile);
+      formData.append('work_name', form.work_name);
+      formData.append('email', form.email);
+      formData.append('mol_db', form.mol_db);
+      formData.append('target', form.target);
+      formData.append('resn', form.resn);
+    } else if (form.smiles) {
+      formData.append('work_name', form.work_name);
+      formData.append('email', form.email);
+      formData.append('smiles', form.smiles);
+    }
 
     this.rest.postData('virscreens/', formData)
       .subscribe(data => {
           console.log('newSEAResponse:', data);
-          alert('任务提交成功！');
+          alert('Task Submission Successful！');
         },
         error2 => {
           console.log('error', error2);
-          alert('任务提交失败！');
+          alert('Task Submission Failed！');
         },
         () => {
-         newSeaForm.reset();
+          newSeaForm.reset();
         });
   }
 }

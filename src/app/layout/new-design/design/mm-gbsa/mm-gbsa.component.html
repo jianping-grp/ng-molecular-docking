@@ -1,12 +1,12 @@
 <div nz-row>
   <form nz-form  class="form" (ngSubmit)="onSubmit(newGbsaForm)" #newGbsaForm="ngForm">
     <div nz-col nzSpan="12">
-      <nz-form-item>
-        <nz-form-label [nzSpan]="13" nzRequired>Center on select residue</nz-form-label>
-        <nz-form-control [nzSpan]="9">
-          <input nz-input name="resn" [(ngModel)]="gbsa.resn">
-        </nz-form-control>
-      </nz-form-item>
+      <!--<nz-form-item>-->
+        <!--<nz-form-label [nzSpan]="13" nzRequired>Center on select residue</nz-form-label>-->
+        <!--<nz-form-control [nzSpan]="9">-->
+          <!--<input nz-input name="resn" [(ngModel)]="gbsa.resn">-->
+        <!--</nz-form-control>-->
+      <!--</nz-form-item>-->
       <nz-form-item>
         <nz-form-label [nzSpan]="13" nzRequired>Upload your ligand</nz-form-label>
         <nz-form-control [nzSpan]="10">
@@ -47,9 +47,9 @@
       </nz-form-item>
     </div>
     <div nz-col [nzSpan]="6" [nzOffset]="2">
-      <div style="color: #54d98c">
-        If you have submitted a docking job in this sever, you can calculate the binding energy with result ID
-      </div>
+      <!--<div style="color: #54d98c">-->
+        <!--If you have submitted a docking job in this sever, you can calculate the binding energy with result ID-->
+      <!--</div>-->
       <div style="margin-top: 150px">
         <h2 style="text-align: center; color: orangered">Attenion</h2>
         <p style="color: #54d98c">If you want to submit your  complex structure, You need pay attention to the atom name of ligand.
